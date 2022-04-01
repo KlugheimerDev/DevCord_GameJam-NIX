@@ -1,0 +1,8 @@
+name: Dreamvator
+version: '${project.version}'
+main: de.nix.dreamvator.Dreamvator
+api-version: 1.18
+prefix: Dreamvator
+authors: [ Klugheimer, Amirs, more ]
+description: The elevator of my Dreams
+website: http://mistics.net/
