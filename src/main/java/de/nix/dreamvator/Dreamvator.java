@@ -8,6 +8,8 @@ public final class Dreamvator extends JavaPlugin {
 
     public static final String PREFIX = "§9" + ChatColor.of("#3972CB") + "Dreamvator §7» ";
 
+    //Test für develop
+
     @Override
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage(PREFIX + "§aDer Aufzug wurde gestartet");
