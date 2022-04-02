@@ -57,7 +57,9 @@ public class SignsManager implements Listener {
             Bukkit.getConsoleSender().sendMessage("§1 3");
             try {
                 Door otherDoor = (Door) loc.getBlock().getBlockData();
+                Bukkit.broadcastMessage("4 " + otherDoor.toString());
                 if(sign.getLine(1).contains("sync")) {
+                    Bukkit.broadcastMessage("5");
                     otherDoor.setOpen(((Door) event.getClickedBlock().getBlockData()).isOpen());
                 } else if(sign.getLine(1).contains("switch")) {
                     otherDoor.setOpen(!((Door) event.getClickedBlock().getBlockData()).isOpen());
