@@ -25,6 +25,7 @@ public class SignsManager implements Listener {
         "[checkpoint]" "level" - Setzt Checkpoint mit der Nummer "level"
         "[doorWhat]" "sync/switch" "x,y,z" - Wenn eine Tür mit dem Schild aufgeht, gehen die andere auch auf
         "[mapEnd]" "" "1/2"
+        "[openable] - Türen (auch Eisen) lassen sich so öffnen (auch bei gecancelten Event)
      */
 
 
