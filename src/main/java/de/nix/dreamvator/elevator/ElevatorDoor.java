@@ -13,6 +13,7 @@ import org.bukkit.entity.FallingBlock;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ElevatorDoor {
@@ -20,6 +21,8 @@ public class ElevatorDoor {
     private List<Block> blocks;
     private List<FallingBlock> fallingBlocks;
     private BlockFace direction;
+
+    private Material doorBlock;
 
     private int time;
 
@@ -29,11 +32,25 @@ public class ElevatorDoor {
         this.plugin = plugin;
         this.direction = direction;
 
+        this.doorBlock = Material.TARGET;
+
         Cuboid cuboid = new Cuboid(loc1, loc2);
         this.blocks = cuboid.getBlocks();
+        this.fallingBlocks = new ArrayList<>();
     }
 
-    private void move(int timeInTicks) {
+    public void reset() {
+        if(fallingBlocks != null && !fallingBlocks.isEmpty()) {
+            fallingBlocks.forEach(fallingBlock -> {
+                fallingBlock.remove();
+            });
+            blocks.forEach(block -> {
+                block.setType(doorBlock);
+            });
+        }
+    }
+
+    public void move(int timeInTicks) {
         if(blocks == null || blocks.isEmpty())
             return;
         this.time = time;
@@ -41,14 +58,14 @@ public class ElevatorDoor {
             FallingBlock fallingBlock = block.getWorld().spawnFallingBlock(block.getLocation(), block.getBlockData());
             fallingBlock.setGravity(false);
             fallingBlock.setInvulnerable(true);
-            fallingBlock.setTicksLived(-1);
+            fallingBlock.setTicksLived(Integer.MAX_VALUE);
             fallingBlock.setDropItem(false);
 
             fallingBlocks.add(fallingBlock);
             block.setType(Material.AIR);
         });
 
-        Bukkit.getScheduler().runTaskTimer(plugin, new BukkitRunnable() {
+        new BukkitRunnable() {
             int ticks = 0;
             @Override
             public void run() {
@@ -62,7 +79,7 @@ public class ElevatorDoor {
                 }
                 this.cancel();
             }
-        }, 1, 1);
+        }.runTaskTimer(plugin, 1, 1);
 
     }
 

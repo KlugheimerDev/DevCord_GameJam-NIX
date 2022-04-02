@@ -26,11 +26,12 @@ public class Elevator {
         this.cuboid = new Cuboid(position1, position2);
 
         List<Block> cuboidBlocks = cuboid.getBlocks();
+        List<Block> newBlocks = new ArrayList<>();
         cuboidBlocks.forEach(block -> {
             if(!block.getType().equals(Material.LIGHT_GRAY_TERRACOTTA))
-                cuboidBlocks.remove(block);
+                newBlocks.add(block);
         });
-        this.blocks = cuboidBlocks;
+        this.blocks = newBlocks;
     }
 
     public Elevator addDoor(ElevatorDoor door) {
