@@ -41,7 +41,7 @@ public class Camera {
             ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestplate.getItemMeta();
             chestplateMeta.setColor(Color.WHITE);chestplate.setItemMeta(chestplateMeta);
 
-            this.armorStand.setHelmet(Skull.getCustomSkull("http://textures.minecraft.net/texture/3db83586542934f8c3231a5284f2489b87678478454fca69359447569f157d14", ""));
+            this.armorStand.setHelmet(Skull.getCustomSkull("http://textures.minecraft.net/texture/b8921ae44f0a7ae26a8ac1eaee6f09eb668df28728afbaa318efd8fedbdf69", ""));
             this.armorStand.setChestplate(chestplate);
             this.armorStand.setLeggings(leggings);
             this.armorStand.setBoots(boots);
