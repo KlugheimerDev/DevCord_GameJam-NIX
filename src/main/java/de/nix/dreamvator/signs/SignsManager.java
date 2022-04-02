@@ -35,7 +35,7 @@ public class SignsManager implements Listener {
 
     @EventHandler
     public void onDoorRightClick(PlayerInteractEvent event) {
-        if(!event.hasBlock() || event.getAction() != Action.RIGHT_CLICK_BLOCK || !event.getClickedBlock().getType().toString().contains("DOOR")) return;
+        if(!event.hasBlock() || event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getClickedBlock().getType().toString().contains("TRAP") || !event.getClickedBlock().getType().toString().contains("DOOR")) return;
         int checkBlock = ((Door) event.getClickedBlock().getBlockData()).getHalf().toString().contains("TOP") ? -3 : -2;
 
         if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[lock]")) {
