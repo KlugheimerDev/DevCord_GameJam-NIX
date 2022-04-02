@@ -85,7 +85,9 @@ public class SignsManager implements Listener {
         if(getLineToString(signLoc, 2).equalsIgnoreCase("1")) onePressed = event.getPlayer().getDisplayName();
         if(getLineToString(signLoc, 2).equalsIgnoreCase("2")) secondPressed = event.getPlayer().getDisplayName();
 
-        if(!(onePressed.equalsIgnoreCase("") && secondPressed.equalsIgnoreCase(""))) {
+        if(onePressed.equalsIgnoreCase("") || secondPressed.equalsIgnoreCase("")) {
+            return;
+        } else {
             onePressed = "";
             secondPressed = "";
 
