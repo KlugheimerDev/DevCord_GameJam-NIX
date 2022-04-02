@@ -107,7 +107,7 @@ public class LobbyManager implements Listener {
 
     private void hidePlayer(Player player) {
         Bukkit.getOnlinePlayers().forEach(current -> {
-            current.hidePlayer(plugin, player);
+            //current.hidePlayer(plugin, player);
         });
     }
 
