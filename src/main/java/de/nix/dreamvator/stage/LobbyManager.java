@@ -11,16 +11,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class LobbyManager implements Listener {
 
-    private final Dreamvator plugin;
+    private final Plugin plugin;
     private boolean lobbyStage = true;
 
-    public LobbyManager(Dreamvator plugin) {
+    public LobbyManager(Plugin plugin) {
         Bukkit.getPluginManager().registerEvents(this, plugin);
         this.plugin = plugin;
     }
