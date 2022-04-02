@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.type.Door;
+import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -69,8 +70,8 @@ public class SignsManager implements Listener {
         if(!event.getAction().equals(Action.PHYSICAL)) return;
 
         if(event.getClickedBlock().getType().equals(Material.WARPED_PRESSURE_PLATE)) {
-            if(((PressurePlate) event.getClickedBlock()).isPressed()) {
-                Location signLoc = event.getClickedBlock().getLocation().add(0, -2, 0);
+            if(((RedstoneWire) event.getClickedBlock().getLocation().add(0, -2, 0).getBlock().getBlockData()).getPower() != 0) {
+                Location signLoc = event.getClickedBlock().getLocation().add(1, -2, 0);
                 if(!signHasString(signLoc, "[mapEnd]")) return;
 
                 if(getLineToString(signLoc, 2).equalsIgnoreCase("1")) {
