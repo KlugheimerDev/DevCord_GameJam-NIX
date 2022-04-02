@@ -38,13 +38,15 @@ public class Camera {
             ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);LeatherArmorMeta leggingsMeta = (LeatherArmorMeta) leggings.getItemMeta();
             leggingsMeta.setColor(Color.WHITE);leggings.setItemMeta(leggingsMeta);
 
-            ItemStack chestplate = new ItemStack(Material.LEATHER_BOOTS);LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestplate.getItemMeta();
+            ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestplate.getItemMeta();
             chestplateMeta.setColor(Color.WHITE);chestplate.setItemMeta(chestplateMeta);
 
             this.armorStand.setHelmet(Skull.getCustomSkull("http://textures.minecraft.net/texture/3db83586542934f8c3231a5284f2489b87678478454fca69359447569f157d14", ""));
             this.armorStand.setChestplate(chestplate);
             this.armorStand.setLeggings(leggings);
             this.armorStand.setBoots(boots);
+            this.armorStand.setArms(true);
+            this.armorStand.setItemInHand(new ItemStack(Material.PAPER));
         }
 
         this.armorStand.setGravity(false);

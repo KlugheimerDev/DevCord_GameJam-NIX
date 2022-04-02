@@ -70,7 +70,7 @@ public class SignsManager implements Listener {
                 Dreamvator.checkpointManager.setPlayersCheckpoint(event.getPlayer(), i);
             } catch (Exception e) {
                 Bukkit.getConsoleSender().sendMessage(Dreamvator.PREFIX + "§4Checkpoint-Schild bei " + sign.getLocation().toString() + " hat keine richtige Zahl im Format 'x'");
-            }
+            }w
         }
     }
      */

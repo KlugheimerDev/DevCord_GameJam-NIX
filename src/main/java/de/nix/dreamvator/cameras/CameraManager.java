@@ -25,7 +25,8 @@ public class CameraManager {
     }
 
     public void registerCameras() {
-        this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),-26, -59, -27), CameraType.CAMERA));
+        this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),-13, -59, 38), CameraType.SCIENTIST));
+        this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),-1, -36.5, -19), CameraType.CAMERA));
     }
 
     public void disable() {
@@ -62,7 +63,7 @@ public class CameraManager {
     private EulerAngle directionToEuler(Location dir) {
         double xzLength = Math.sqrt(dir.getX()*dir.getX() + dir.getZ()*dir.getZ());
         double pitch = Math.atan2(xzLength, dir.getY()) - Math.PI / 2;
-        double yaw = -Math.atan2(dir.getX(), dir.getZ()) + Math.PI / 4;
+        double yaw = -Math.atan2(dir.getX(), dir.getZ()) + Math.PI / 180;
         return new EulerAngle(pitch, yaw, 0);
     }
 }
