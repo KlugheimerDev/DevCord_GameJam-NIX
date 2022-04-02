@@ -3,6 +3,7 @@ package de.nix.dreamvator;
 import de.nix.dreamvator.cameras.CameraManager;
 import de.nix.dreamvator.checkpoint.CheckpointManager;
 import de.nix.dreamvator.elevator.ElevatorManager;
+import de.nix.dreamvator.features.WallClimb;
 import de.nix.dreamvator.misc.MetadataManager;
 import de.nix.dreamvator.signs.SignsManager;
 import de.nix.dreamvator.stage.StageManager;
@@ -36,6 +37,7 @@ public final class Dreamvator extends JavaPlugin {
         SignsManager signsManager = new SignsManager(this);
         ElevatorManager elevatorManager = new ElevatorManager(this);
         cameraManager = new CameraManager(this);
+        WallClimb wallClimb = new WallClimb(this);
 
         stageManager = new StageManager(this);
         metadataManager = new MetadataManager(this);
