@@ -1,5 +1,6 @@
 package de.nix.dreamvator;
 
+import de.nix.dreamvator.cameras.CameraManager;
 import de.nix.dreamvator.checkpoint.CheckpointManager;
 import de.nix.dreamvator.elevator.ElevatorManager;
 import de.nix.dreamvator.misc.MetadataManager;
@@ -8,7 +9,6 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ public final class Dreamvator extends JavaPlugin {
 
     public static MetadataManager metadataManager;
     public static CheckpointManager checkpointManager;
+    public static CameraManager cameraManager;
 
     private static List<Player> players;
 
@@ -32,14 +33,18 @@ public final class Dreamvator extends JavaPlugin {
 
         SignsManager signsManager = new SignsManager(this);
         ElevatorManager elevatorManager = new ElevatorManager(this);
+        cameraManager = new CameraManager(this);
+
         metadataManager = new MetadataManager(this);
         checkpointManager = new CheckpointManager();
 
         Bukkit.getConsoleSender().sendMessage(PREFIX + "§aDer Aufzug wurde gestartet");
+        Bukkit.getConsoleSender().sendMessage(PREFIX + "§cINFO: Die Main-World MUSS 'world' heißen, ansonsten ist die Map nicht spielbar");
     }
 
     @Override
     public void onDisable() {
+        cameraManager.disable();
         Bukkit.getConsoleSender().sendMessage(PREFIX + "§cNotstopp aktiviert");
     }
 
