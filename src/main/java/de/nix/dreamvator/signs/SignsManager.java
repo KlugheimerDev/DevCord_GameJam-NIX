@@ -42,10 +42,11 @@ public class SignsManager implements Listener {
             event.setCancelled(true);
         }
 
+        Bukkit.getConsoleSender().sendMessage("§1 1");
         if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[doorWhat]")) {
             Sign sign = (Sign) event.getClickedBlock().getLocation().add(0, checkBlock, 0).getBlock().getState();
             String[] locStrings = sign.getLine(2).split(",");
-
+            Bukkit.getConsoleSender().sendMessage("§1 2");
             Location loc = event.getPlayer().getLocation();
             try {
                 loc = new Location(event.getPlayer().getWorld(), Double.parseDouble(locStrings[0]), Double.parseDouble(locStrings[1]), Double.parseDouble(locStrings[2]));
@@ -53,6 +54,7 @@ public class SignsManager implements Listener {
                 Bukkit.getConsoleSender().sendMessage("§4ERROR beim ParseInten");
             }
 
+            Bukkit.getConsoleSender().sendMessage("§1 3");
             try {
                 Door otherDoor = (Door) loc.getBlock().getBlockData();
                 if(sign.getLine(1).contains("sync")) {
