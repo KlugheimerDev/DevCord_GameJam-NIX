@@ -85,9 +85,8 @@ public class SignsManager implements Listener {
         if(getLineToString(signLoc, 2).equalsIgnoreCase("1")) onePressed = event.getPlayer().getDisplayName();
         if(getLineToString(signLoc, 2).equalsIgnoreCase("2")) secondPressed = event.getPlayer().getDisplayName();
 
-        if(onePressed.equalsIgnoreCase("") || secondPressed.equalsIgnoreCase("")) {
-            return;
-        } else {
+        Bukkit.broadcastMessage(onePressed + " | " + secondPressed);
+        if(!onePressed.equalsIgnoreCase("") && !secondPressed.equalsIgnoreCase("")) {
             onePressed = "";
             secondPressed = "";
 
