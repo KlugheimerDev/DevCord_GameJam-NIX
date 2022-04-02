@@ -25,14 +25,9 @@ public class CancelListener implements Listener {
 
     public void onInteract(PlayerInteractEvent event) {
         if(event.getClickedBlock() == null) return;
+        event.getPlayer().sendMessage("" + event.getClickedBlock().getType());
         if(disabledBlocks.contains(event.getClickedBlock().getType()))
             event.setCancelled(true);
-    }
-
-    public void onPlace(BlockPlaceEvent e) {
-        if(e.getPlayer().getGameMode().equals(GameMode.ADVENTURE)) {
-            e.setCancelled(true);
-        }
     }
 
 }
