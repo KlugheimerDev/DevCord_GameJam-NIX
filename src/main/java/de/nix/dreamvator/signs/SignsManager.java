@@ -45,15 +45,23 @@ public class SignsManager implements Listener {
         if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[doorWhat]")) {
             Sign sign = (Sign) event.getClickedBlock().getLocation().add(0, checkBlock, 0).getBlock().getState();
             String[] locStrings = sign.getLine(2).split(",");
+
+            Location loc = event.getPlayer().getLocation();
             try {
-                Door otherDoor = (Door) new Location(event.getPlayer().getWorld(), Double.parseDouble(locStrings[0]), Double.parseDouble(locStrings[1]), Double.parseDouble(locStrings[2])).getBlock().getBlockData();
+                loc = new Location(event.getPlayer().getWorld(), Double.parseDouble(locStrings[0]), Double.parseDouble(locStrings[1]), Double.parseDouble(locStrings[2]));
+            } catch (Exception e1) {
+                Bukkit.getConsoleSender().sendMessage("§4ERROR beim ParseInten");
+            }
+
+            try {
+                Door otherDoor = (Door) loc.getBlock().getBlockData();
                 if(sign.getLine(1).contains("sync")) {
                     otherDoor.setOpen(((Door) event.getClickedBlock().getBlockData()).isOpen());
                 } else if(sign.getLine(1).contains("switch")) {
                     otherDoor.setOpen(!((Door) event.getClickedBlock().getBlockData()).isOpen());
                 }
 
-            } catch (Exception e) {}
+            } catch (Exception e) {Bukkit.getConsoleSender().sendMessage("§4Error beim Casten");}
 
         }
     }
