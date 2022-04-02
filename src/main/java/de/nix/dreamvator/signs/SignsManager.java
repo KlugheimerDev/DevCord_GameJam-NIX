@@ -49,9 +49,9 @@ public class SignsManager implements Listener {
                 Location loc = new Location(event.getPlayer().getWorld(), Double.parseDouble(locStrings[0]), Double.parseDouble(locStrings[1]), Double.parseDouble(locStrings[2]));
                 Door otherDoor = (Door) loc.getBlock().getBlockData();
                 if(sign.getLine(1).contains("sync")) {
-                    otherDoor.setOpen(((Door) event.getClickedBlock().getBlockData()).isOpen());
-                } else if(sign.getLine(1).contains("switch")) {
                     otherDoor.setOpen(!((Door) event.getClickedBlock().getBlockData()).isOpen());
+                } else if(sign.getLine(1).contains("switch")) {
+                    otherDoor.setOpen(((Door) event.getClickedBlock().getBlockData()).isOpen());
                 }
 
                 loc.getBlock().setBlockData(otherDoor);
