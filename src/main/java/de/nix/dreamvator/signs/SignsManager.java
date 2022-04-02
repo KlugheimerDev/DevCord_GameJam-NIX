@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.type.Door;
-import org.bukkit.block.data.type.RedstoneWire;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -15,7 +14,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.material.PressurePlate;
 import org.bukkit.plugin.Plugin;
 
 public class SignsManager implements Listener {
@@ -26,7 +24,7 @@ public class SignsManager implements Listener {
         "[lock]" - Macht Türen nicht mehr aufmachbar
         "[checkpoint]" "level" - Setzt Checkpoint mit der Nummer "level"
         "[doorWhat]" "sync/switch" "x,y,z" - Wenn eine Tür mit dem Schild aufgeht, gehen die andere auch auf
-
+        "[mapEnd]" "" "1/2"
      */
 
 
@@ -85,7 +83,6 @@ public class SignsManager implements Listener {
         if(getLineToString(signLoc, 2).equalsIgnoreCase("1")) onePressed = event.getPlayer().getDisplayName();
         if(getLineToString(signLoc, 2).equalsIgnoreCase("2")) secondPressed = event.getPlayer().getDisplayName();
 
-        Bukkit.broadcastMessage(onePressed + " | " + secondPressed);
         if(!onePressed.equalsIgnoreCase("") && !secondPressed.equalsIgnoreCase("")) {
             onePressed = "";
             secondPressed = "";

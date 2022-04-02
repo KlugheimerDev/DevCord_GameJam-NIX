@@ -18,7 +18,7 @@ public class StageManager {
 
     public StageManager(Dreamvator plugin) {
         this.plugin = plugin;
-        currentStage = Stage.STAGE1;
+        currentStage = Stage.LOBBY;
     }
 
     public void switchToNextStage() {
@@ -26,17 +26,13 @@ public class StageManager {
     }
 
     public void setCurrentStage(int id) {
-        Dreamvator.getPlayers().get(0).teleport(new Location(Dreamvator.getPlayers().get(0).getWorld(),-14, -58, -61));
-        Dreamvator.getPlayers().get(1).teleport(new Location(Dreamvator.getPlayers().get(1).getWorld(),-13, -58, -61));
+        Dreamvator.getPlayers().get(0).teleport(new Location(Dreamvator.getPlayers().get(0).getWorld(),-13.5, -58, -61, -70, 68));
+        Dreamvator.getPlayers().get(1).teleport(new Location(Dreamvator.getPlayers().get(1).getWorld(),-12.5, -58, -61, 55, 68));
 
         Stage[] stages = Stage.values();
         currentStage = stages[id];
 
-        Bukkit.broadcastMessage("Currenct Stage" + currentStage.getID());
-    }
-
-    public Stage getCurrentStage() {
-        return currentStage;
+        //Broadcast
     }
 
     private void throwEffect() {
@@ -53,9 +49,14 @@ public class StageManager {
         }, 20);
     }
 
+    public Stage getCurrentStage() {
+        return currentStage;
+    }
+
     public enum Stage{
-        STAGE1(0),
-        STAGE2(1);
+        LOBBY(0),
+        STAGE1(1),
+        STAGE2(2);
 
         private final int id;
 
