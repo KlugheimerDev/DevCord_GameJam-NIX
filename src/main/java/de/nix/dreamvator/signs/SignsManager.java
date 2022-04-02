@@ -3,6 +3,7 @@ package de.nix.dreamvator.signs;
 import de.nix.dreamvator.Dreamvator;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.type.Door;
@@ -11,7 +12,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.material.PressurePlate;
 import org.bukkit.plugin.Plugin;
 
 public class SignsManager implements Listener {
@@ -60,6 +62,47 @@ public class SignsManager implements Listener {
         }
     }
 
+    boolean onePressed = false;
+    boolean secondPressed = false;
+    @EventHandler
+    public void onPressurePlate(PlayerInteractEvent event) {
+        if(!event.getAction().equals(Action.PHYSICAL)) return;
+
+        if(event.getClickedBlock().getType().equals(Material.WARPED_PRESSURE_PLATE)) {
+            if(((PressurePlate) event.getClickedBlock()).isPressed()) {
+                Location signLoc = event.getClickedBlock().getLocation().add(0, -2, 0);
+                if(!signHasString(signLoc, "[mapEnd]")) return;
+
+                if(getLineToString(signLoc, 2).equalsIgnoreCase("1")) {
+                    onePressed = true;
+                } else if (getLineToString(signLoc, 2).equalsIgnoreCase("2")) {
+                    secondPressed = true;
+                }
+
+            } else {
+                Location signLoc = event.getClickedBlock().getLocation().add(0, -2, 0);
+                if(!signHasString(signLoc, "[mapEnd]")) return;
+
+                if(getLineToString(signLoc, 2).equalsIgnoreCase("1")) {
+                    onePressed = false;
+                } else if (getLineToString(signLoc, 2).equalsIgnoreCase("2")) {
+                    secondPressed = false;
+                }
+            }
+        }
+
+        if(onePressed && secondPressed) {
+            onePressed = false;
+            secondPressed = false;
+
+            Dreamvator.stageManager.switchToNextStage();
+        }
+    }
+
+    public void onJoin(PlayerJoinEvent event) {
+        Dreamvator.getPlayers().add(event.getPlayer());
+    }
+
     /*
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
@@ -89,5 +132,14 @@ public class SignsManager implements Listener {
                 return true;
         }
         return false;
+    }
+
+    private String getLineToString(Location location, int i) {
+        Block signBlock = location.getBlock();
+        if(signBlock.getType().toString().contains("SIGN")) {
+            Sign sign = (Sign) signBlock.getState();
+            return sign.getLine(i);
+        }
+        return "";
     }
 }

@@ -5,6 +5,7 @@ import de.nix.dreamvator.checkpoint.CheckpointManager;
 import de.nix.dreamvator.elevator.ElevatorManager;
 import de.nix.dreamvator.misc.MetadataManager;
 import de.nix.dreamvator.signs.SignsManager;
+import de.nix.dreamvator.stage.StageManager;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -21,6 +22,7 @@ public final class Dreamvator extends JavaPlugin {
     public static CheckpointManager checkpointManager;
     public static CameraManager cameraManager;
 
+    public static StageManager stageManager;
     private static List<Player> players;
 
     public static final String PREFIX = "§9" + ChatColor.of("#3972CB") + "Dreamvator §7» ";
@@ -35,6 +37,7 @@ public final class Dreamvator extends JavaPlugin {
         ElevatorManager elevatorManager = new ElevatorManager(this);
         cameraManager = new CameraManager(this);
 
+        stageManager = new StageManager(this);
         metadataManager = new MetadataManager(this);
         checkpointManager = new CheckpointManager();
 
