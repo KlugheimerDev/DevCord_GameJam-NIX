@@ -1,5 +1,6 @@
 package de.nix.dreamvator.elevator;
 
+import de.nix.dreamvator.Dreamvator;
 import de.nix.dreamvator.misc.Cuboid;
 import org.bukkit.Location;
 import org.bukkit.Material;

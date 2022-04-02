@@ -11,7 +11,7 @@ public final class Dreamvator extends JavaPlugin {
 
     private Dreamvator instance;
 
-    MetadataManager metadataManager;
+    public static MetadataManager metadataManager;
 
     public static final String PREFIX = "§9" + ChatColor.of("#3972CB") + "Dreamvator §7» ";
 
