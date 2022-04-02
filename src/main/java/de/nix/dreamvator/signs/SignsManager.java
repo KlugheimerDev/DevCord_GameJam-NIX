@@ -14,6 +14,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.material.PressurePlate;
 import org.bukkit.plugin.Plugin;
 
@@ -63,61 +64,34 @@ public class SignsManager implements Listener {
         }
     }
 
-    boolean onePressed = false;
-    boolean secondPressed = false;
     @EventHandler
-    public void onPressurePlate(PlayerInteractEvent event) {
-        if(!event.getAction().equals(Action.PHYSICAL)) return;
-
-        if(event.getClickedBlock().getType().equals(Material.WARPED_PRESSURE_PLATE)) {
-            if(((RedstoneWire) event.getClickedBlock().getLocation().add(0, -2, 0).getBlock().getBlockData()).getPower() != 0) {
-                Location signLoc = event.getClickedBlock().getLocation().add(1, -2, 0);
-                if(!signHasString(signLoc, "[mapEnd]")) return;
-
-                if(getLineToString(signLoc, 2).equalsIgnoreCase("1")) {
-                    onePressed = true;
-                } else if (getLineToString(signLoc, 2).equalsIgnoreCase("2")) {
-                    secondPressed = true;
-                }
-
-            } else {
-                Location signLoc = event.getClickedBlock().getLocation().add(0, -2, 0);
-                if(!signHasString(signLoc, "[mapEnd]")) return;
-
-                if(getLineToString(signLoc, 2).equalsIgnoreCase("1")) {
-                    onePressed = false;
-                } else if (getLineToString(signLoc, 2).equalsIgnoreCase("2")) {
-                    secondPressed = false;
-                }
-            }
-        }
-
-        if(onePressed && secondPressed) {
-            onePressed = false;
-            secondPressed = false;
-
-            Dreamvator.stageManager.switchToNextStage();
-        }
-    }
-
     public void onJoin(PlayerJoinEvent event) {
         Dreamvator.getPlayers().add(event.getPlayer());
     }
 
-    /*
+    String onePressed = "";
+    String secondPressed = "";
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
-        if(signHasString(event.getPlayer().getLocation().add(0, -2, 0), "[checkpoint]")) {
-            Sign sign = (Sign) event.getPlayer().getLocation().add(0, -2, 0).getBlock().getState();
-            try {
-                int i = Integer.parseInt(sign.getLine(1));
-                Dreamvator.checkpointManager.setPlayersCheckpoint(event.getPlayer(), i);
-            } catch (Exception e) {
-                Bukkit.getConsoleSender().sendMessage(Dreamvator.PREFIX + "§4Checkpoint-Schild bei " + sign.getLocation().toString() + " hat keine richtige Zahl im Format 'x'");
-            }w
+        if(!event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.EMERALD_BLOCK)) {
+            if(!onePressed.equalsIgnoreCase("") || !secondPressed.equalsIgnoreCase(""))
+                if(onePressed.equalsIgnoreCase(event.getPlayer().getDisplayName())) onePressed = "";
+                if(secondPressed.equalsIgnoreCase(event.getPlayer().getDisplayName())) secondPressed = "";
+        }
+
+        Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
+        if(!signHasString(signLoc, "[mapEnd]")) return;
+
+        if(getLineToString(signLoc, 2).equalsIgnoreCase("1")) onePressed = event.getPlayer().getDisplayName();
+        if(getLineToString(signLoc, 2).equalsIgnoreCase("2")) secondPressed = event.getPlayer().getDisplayName();
+
+        if(!(onePressed.equalsIgnoreCase("") && secondPressed.equalsIgnoreCase(""))) {
+            onePressed = "";
+            secondPressed = "";
+
+            Dreamvator.stageManager.switchToNextStage();
         }
     }
-     */
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
