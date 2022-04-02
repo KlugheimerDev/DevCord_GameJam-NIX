@@ -35,6 +35,8 @@ public class StageManager {
 
         Stage[] stages = Stage.values();
         currentStage = stages[id];
+
+        Bukkit.broadcastMessage(currentStage.getID() + "");
     }
 
     private void throwEffect() {
@@ -56,13 +58,13 @@ public class StageManager {
     }
 
     public enum Stage{
-        LOBBY(0),
-        STAGE1(1),
-        STAGE2(2);
+        LOBBY(0, -13.5, -12.5),
+        STAGE1(1, -13.5, -12.5),
+        STAGE2(2, -13.5, -12.5);
 
         private final int id;
 
-        Stage(int id) {
+        Stage(int id, double x1, double x2) {
             this.id = id;
         }
 

@@ -32,7 +32,7 @@ public class LobbyManager implements Listener {
         event.setJoinMessage("");
         Player player = event.getPlayer();
         if(lobbyStage) {
-            event.setJoinMessage(Dreamvator.PREFIX + "§2§l" + player.getDisplayName() + " §r§2hat das Spiel betreten!");
+            event.setJoinMessage(Dreamvator.PREFIX + "§2" + player.getDisplayName() + " §r§7hat das Spiel betreten!");
             player.setGameMode(GameMode.ADVENTURE);
             if (Dreamvator.getPlayers().size() < 2) {
                 Dreamvator.getPlayers().add(player);
@@ -50,7 +50,7 @@ public class LobbyManager implements Listener {
         event.setQuitMessage("");
         Player player = event.getPlayer();
         if(lobbyStage) {
-            event.setQuitMessage(Dreamvator.PREFIX + "§4§l" + player.getDisplayName() + " §r§4hat das Spiel verlassen!");
+            event.setQuitMessage(Dreamvator.PREFIX + "§4" + player.getDisplayName() + " §r§7hat das Spiel verlassen!");
             Dreamvator.getPlayers().remove(player);
         }
     }
@@ -61,7 +61,7 @@ public class LobbyManager implements Listener {
        if(event.getClickedBlock() == null || !lobbyStage) return;
        if(locationsMatch(event.getClickedBlock().getLocation(), -12, -58, -40)) {
            event.setCancelled(true);
-           event.getPlayer().sendMessage(Dreamvator.PREFIX + "§7Gerade gibt es nur den Koop-Modus. Adventure Maps machen aber auch mehr Spaß zu zweit, oder ?");
+           event.getPlayer().sendMessage(Dreamvator.PREFIX + "§fGerade gibt es nur den Koop-Modus. Adventure Maps machen aber auch mehr Spaß zu zweit, oder ?");
        } else if(locationsMatch(event.getClickedBlock().getLocation(), -10, -58, -37)) {
             if(Dreamvator.getPlayers().size() == 2) {
                 lobbyStage = false;
@@ -70,7 +70,7 @@ public class LobbyManager implements Listener {
                     if(Dreamvator.getPlayers().contains(player)) {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 120, 1, false, false, false));
                     } else {
-                        player.sendMessage(Dreamvator.PREFIX + "§7Ein Spiel wurde gestartet. Da kein Platz für dich mehr war, bist du nun ein Spectator!");
+                        player.sendMessage(Dreamvator.PREFIX + "§fEin Spiel wurde gestartet. Da kein Platz für dich mehr war, bist du nun ein Spectator!");
                         player.setGameMode(GameMode.SPECTATOR);
                         hidePlayer(player);
                     }
@@ -87,8 +87,8 @@ public class LobbyManager implements Listener {
                                 });
                             case(5):
                                 Bukkit.getOnlinePlayers().forEach(player -> {
-                                    player.sendMessage("§9" + ChatColor.of("#3972CB") + Dreamvator.getPlayers().get(0).getDisplayName() + "» §7Wir haben verschlafen! Wir müssen zur Arbeit!");
-                                    player.sendMessage("§9" + ChatColor.of("#3972CB") + Dreamvator.getPlayers().get(1).getDisplayName() + "» §7Los zum Lift!");
+                                    player.sendMessage("§9" + ChatColor.of("#3972CB") + Dreamvator.getPlayers().get(0).getDisplayName() + "§7 » §r§fWir haben verschlafen! Wir müssen zur Arbeit!");
+                                    player.sendMessage("§9" + ChatColor.of("#3972CB") + Dreamvator.getPlayers().get(1).getDisplayName() + "§7 » §r§fLos zum Lift!");
                                 });
                                 Dreamvator.stageManager.setCurrentStage(1);
                                 break;
