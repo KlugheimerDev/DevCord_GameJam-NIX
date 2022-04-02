@@ -1,6 +1,6 @@
 package de.nix.dreamvator;
 
-import de.nix.dreamvator.Signs.SignsManager;
+import de.nix.dreamvator.signs.SignsManager;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,7 +15,7 @@ public final class Dreamvator extends JavaPlugin {
     public void onEnable() {
         this.instance = this;
 
-        SignsManager signsManager = new SignsManager(instance);
+        SignsManager signsManager = new SignsManager(this);
 
         Bukkit.getConsoleSender().sendMessage(PREFIX + "§aDer Aufzug wurde gestartet");
     }

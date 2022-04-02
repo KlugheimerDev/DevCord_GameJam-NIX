@@ -1,6 +1,5 @@
-package de.nix.dreamvator.Signs;
+package de.nix.dreamvator.signs;
 
-import de.nix.dreamvator.Dreamvator;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -10,12 +9,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.plugin.Plugin;
 
 public class SignsManager implements Listener {
 
-    private final Dreamvator plugin;
+    private Plugin plugin;
 
-    public SignsManager(Dreamvator plugin) {
+    public SignsManager(Plugin plugin) {
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
@@ -34,7 +34,7 @@ public class SignsManager implements Listener {
     private boolean signHasString(Location location, String str) {
         Block signBlock = location.getBlock();
         if(signBlock.getType().toString().contains("SIGN")) {
-            Sign sign = (Sign) signBlock;
+            Sign sign = (Sign) signBlock.getState();
             if(sign.getLine(0).equalsIgnoreCase(str))
                 return true;
         }
