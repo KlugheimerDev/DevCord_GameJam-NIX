@@ -3,21 +3,12 @@ package de.nix.dreamvator.features;
 import de.nix.dreamvator.Dreamvator;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitTask;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class WallClimb {
 
-    private Plugin plugin;
+    private final Plugin plugin;
 
     public WallClimb(Plugin plugin) {
         this.plugin = plugin;
