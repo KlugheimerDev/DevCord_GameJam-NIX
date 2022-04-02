@@ -44,6 +44,12 @@ public class SignsManager implements Listener {
             event.setCancelled(true);
         }
 
+        if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[openable]")) {
+            Door door = (Door) event.getClickedBlock().getBlockData();
+            door.setOpen(door.isOpen() ? false : true);
+            event.getClickedBlock().setBlockData(door);
+        }
+
         if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[doorWhat]")) {
             Sign sign = (Sign) event.getClickedBlock().getLocation().add(0, checkBlock, 0).getBlock().getState();
             String[] locStrings = sign.getLine(2).split(",");
