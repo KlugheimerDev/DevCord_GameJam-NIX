@@ -3,6 +3,7 @@ package de.nix.dreamvator.stage;
 import de.nix.dreamvator.Dreamvator;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
@@ -29,10 +30,11 @@ public class StageManager {
         Dreamvator.getPlayers().get(0).teleport(new Location(Dreamvator.getPlayers().get(0).getWorld(),-13.5, -58, -61, -70, 68));
         Dreamvator.getPlayers().get(1).teleport(new Location(Dreamvator.getPlayers().get(1).getWorld(),-12.5, -58, -61, 55, 68));
 
+        for(int i = 0; i < 6; i++)
+            Dreamvator.getPlayers().get(0).getWorld().playSound(new Location(Dreamvator.getPlayers().get(0).getWorld() ,-15, -59, -60), Sound.BLOCK_BELL_USE, 1, 1);
+
         Stage[] stages = Stage.values();
         currentStage = stages[id];
-
-        //Broadcast
     }
 
     private void throwEffect() {

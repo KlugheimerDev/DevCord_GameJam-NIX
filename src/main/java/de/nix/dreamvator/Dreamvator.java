@@ -6,6 +6,7 @@ import de.nix.dreamvator.elevator.ElevatorManager;
 import de.nix.dreamvator.features.WallClimb;
 import de.nix.dreamvator.misc.MetadataManager;
 import de.nix.dreamvator.signs.SignsManager;
+import de.nix.dreamvator.stage.LobbyManager;
 import de.nix.dreamvator.stage.StageManager;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -36,6 +37,7 @@ public final class Dreamvator extends JavaPlugin {
 
         SignsManager signsManager = new SignsManager(this);
         ElevatorManager elevatorManager = new ElevatorManager(this);
+        LobbyManager lobbyManager = new LobbyManager(this);
         cameraManager = new CameraManager(this);
         WallClimb wallClimb = new WallClimb(this);
 

@@ -62,11 +62,6 @@ public class SignsManager implements Listener {
         }
     }
 
-    @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        Dreamvator.getPlayers().add(event.getPlayer());
-    }
-
     String onePressed = "";
     String secondPressed = "";
     @EventHandler
