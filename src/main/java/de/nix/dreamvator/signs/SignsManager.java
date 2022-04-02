@@ -25,7 +25,6 @@ public class SignsManager implements Listener {
         "[checkpoint]" "level" - Setzt Checkpoint mit der Nummer "level"
         "[doorWhat]" "sync/switch" "x,y,z" - Wenn eine Tür mit dem Schild aufgeht, gehen die andere auch auf
         "[mapEnd]" "" "1/2"
-        "[openable] - Türen (auch Eisen) lassen sich so öffnen (auch bei gecancelten Event)
      */
 
 
@@ -43,12 +42,6 @@ public class SignsManager implements Listener {
 
         if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[lock]")) {
             event.setCancelled(true);
-        }
-
-        if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[openable]")) {
-            Door door = (Door) event.getClickedBlock().getBlockData();
-            door.setOpen(door.isOpen() ? false : true);
-            event.getClickedBlock().setBlockData(door);
         }
 
         if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[doorWhat]")) {
