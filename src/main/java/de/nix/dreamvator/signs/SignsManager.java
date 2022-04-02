@@ -16,6 +16,16 @@ import org.bukkit.plugin.Plugin;
 
 public class SignsManager implements Listener {
 
+    /*
+        Verschiedene Schilderarten
+
+        "[lock]" - Macht Türen nicht mehr aufmachbar
+        "[checkpoint]" "level" - Setzt Checkpoint mit der Nummer "level"
+        "[doorWhat]" "sync/switch" "x,y,z" - Wenn eine Tür mit dem Schild aufgeht, gehen die andere auch auf
+
+     */
+
+
     private Plugin plugin;
 
     public SignsManager(Plugin plugin) {
@@ -31,6 +41,21 @@ public class SignsManager implements Listener {
         if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[lock]")) {
             event.setCancelled(true);
         }
+
+        if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[doorWhat]")) {
+            Sign sign = (Sign) event.getClickedBlock().getLocation().add(0, checkBlock, 0).getBlock().getState();
+            String[] locStrings = sign.getLine(2).split(",");
+            try {
+                Door otherDoor = (Door) new Location(event.getPlayer().getWorld(), Double.parseDouble(locStrings[0]), Double.parseDouble(locStrings[1]), Double.parseDouble(locStrings[2])).getBlock().getBlockData();
+                if(sign.getLine(1).contains("sync")) {
+                    otherDoor.setOpen(((Door) event.getClickedBlock().getBlockData()).isOpen());
+                } else if(sign.getLine(1).contains("switch")) {
+                    otherDoor.setOpen(!((Door) event.getClickedBlock().getBlockData()).isOpen());
+                }
+
+            } catch (Exception e) {}
+
+        }
     }
 
     @EventHandler
@@ -41,7 +66,7 @@ public class SignsManager implements Listener {
                 int i = Integer.parseInt(sign.getLine(1));
                 Dreamvator.checkpointManager.setPlayersCheckpoint(event.getPlayer(), i);
             } catch (Exception e) {
-                Bukkit.getConsoleSender().sendMessage(Dreamvator.PREFIX + "§4Checkpoint-Schild bei " + sign.getLocation().toString() + " hat keine richtige Zahl im Format '[x]'");
+                Bukkit.getConsoleSender().sendMessage(Dreamvator.PREFIX + "§4Checkpoint-Schild bei " + sign.getLocation().toString() + " hat keine richtige Zahl im Format 'x'");
             }
         }
     }
