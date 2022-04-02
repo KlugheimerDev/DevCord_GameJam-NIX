@@ -15,26 +15,14 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WallClimb implements Listener {
+public class WallClimb {
 
     private Plugin plugin;
 
     public WallClimb(Plugin plugin) {
         this.plugin = plugin;
-        Bukkit.getPluginManager().registerEvents(this, plugin);
 
         start();
-    }
-
-    @EventHandler
-    public void playerWallMove(PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-
-        if(isPlayerOnWall(p)) {
-            Dreamvator.metadataManager.setMetadata(p, "isClimbing", "true");
-            p.sendMessage("" + p.hasMetadata("isClimbing"));
-        }
-        Dreamvator.metadataManager.removeMetadata(p, "isClimbing");
     }
 
     public void start() {
@@ -42,18 +30,18 @@ public class WallClimb implements Listener {
             if(Dreamvator.getPlayers() == null || Dreamvator.getPlayers().isEmpty())
                 return;
             Dreamvator.getPlayers().forEach(player -> {
-                if(player.hasMetadata("isClimbing")) {
-                    player.setVelocity(player.getVelocity().setY(0.1));
+                if(isPlayerOnWall(player)) {
+                    player.setVelocity(player.getVelocity().setY(0.25));
                 }
             });
         }, 0, 1);
     }
 
     public boolean isPlayerOnWall(Player player) {
-        if(player.getLocation().add(1, 0, 0).getBlock().getType().equals(Material.MUSHROOM_STEM) ||
-                player.getLocation().add(-1, 0, 0).getBlock().getType().equals(Material.MUSHROOM_STEM) ||
-                player.getLocation().add(0, 0, 1).getBlock().getType().equals(Material.MUSHROOM_STEM) ||
-                player.getLocation().add(0, 0, -1).getBlock().getType().equals(Material.MUSHROOM_STEM)) {
+        if(player.getLocation().add(1, 0, 0).getBlock().getType().equals(Material.WAXED_OXIDIZED_CUT_COPPER) ||
+                player.getLocation().add(-1, 0, 0).getBlock().getType().equals(Material.WAXED_OXIDIZED_CUT_COPPER) ||
+                player.getLocation().add(0, 0, 1).getBlock().getType().equals(Material.WAXED_OXIDIZED_CUT_COPPER) ||
+                player.getLocation().add(0, 0, -1).getBlock().getType().equals(Material.WAXED_OXIDIZED_CUT_COPPER)) {
             return true;
         }
 
