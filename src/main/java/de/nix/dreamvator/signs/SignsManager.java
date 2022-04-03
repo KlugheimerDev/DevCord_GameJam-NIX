@@ -110,7 +110,7 @@ public class SignsManager implements Listener {
         }
 
         Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
-        if(!signHasString(signLoc, "[lasergun]")) return;
+        if(!signHasString(signLoc, "[el]")) return;
 
         if(getLineToString(signLoc, 1).equalsIgnoreCase("golden")) Pressed2 = event.getPlayer().getDisplayName();
         if(getLineToString(signLoc, 1).equalsIgnoreCase("diamond")) Pressed1 = event.getPlayer().getDisplayName();
