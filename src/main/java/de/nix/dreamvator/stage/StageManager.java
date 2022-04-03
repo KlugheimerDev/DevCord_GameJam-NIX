@@ -3,6 +3,7 @@ package de.nix.dreamvator.stage;
 import de.nix.dreamvator.Dreamvator;
 import org.bukkit.*;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.type.Door;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
@@ -41,6 +42,32 @@ public class StageManager {
         if(currentStage.getID() == 2)
             Bukkit.broadcastMessage("§7" + Dreamvator.getPlayers().get(0).getDisplayName() + "§7 » §r§fWaren wir nicht hier schonmal?");
 
+        if(currentStage.getID() == 3) {
+            closeDoor(-20, -60, 41);
+            closeDoor(-20, -60, 44);
+            closeDoor(-16, -60, 44);
+            closeDoor(-11, -60, 44);
+            closeDoor(-11, -60, 41);
+            closeDoor(-5, -60, 43);
+            closeDoor(-5, -60, 42);
+            closeDoor(-6, -60, 46);
+            closeDoor(-9, -60, 46);
+            closeDoor(-6, -60, 51);
+            closeDoor(-9, -60, 51);
+            closeDoor(-4, -60, 49);
+            closeDoor(-4, -60, 55);
+            closeDoor(-9, -60, 58);
+            closeDoor(-11, -60, 55);
+            closeDoor(-7, -60, 62);
+            closeDoor(-8, -60, 62);
+            closeDoor(-7, -60, 65);
+
+            World world = Bukkit.getWorld("world");
+            Door door = (Door) world.getBlockAt(-6, -60, 58).getBlockData();
+            door.setOpen(true);
+            world.getBlockAt(-6, -60, 58).setBlockData(door);
+        }
+
         if(currentStage.getID() == 4) {
             World world = Bukkit.getWorld("world");
 
@@ -67,6 +94,13 @@ public class StageManager {
         if(currentStage.getID() == 6) {
             Bukkit.broadcastMessage(Dreamvator.PREFIX + "§7Danke für's spielen unserer Map! Das Team §5NiX §7und §5Mistics §7danken für diesen schönen Contest, auch wenn wir in den letzten Minuten noch Panik hatten!");
         }
+    }
+
+    private void closeDoor(int x, int y, int z) {
+        World world = Bukkit.getWorld("world");
+        Door door = (Door) world.getBlockAt(x, y ,z).getBlockData();
+        door.setOpen(false);
+        world.getBlockAt(x, y, z).setBlockData(door);
     }
 
     private void throwEffect() {
