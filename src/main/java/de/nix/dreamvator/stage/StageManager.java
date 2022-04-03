@@ -40,6 +40,9 @@ public class StageManager {
         Bukkit.getPluginManager().callEvent(event);
         stageSwitch = false;
 
+        if(currentStage.getID() == 2)
+            Bukkit.broadcastMessage(Dreamvator.PREFIX + "§7");
+
         if(currentStage.getID() == 6) {
             Bukkit.broadcastMessage(Dreamvator.PREFIX + "§7Danke für's spielen unserer Map! Das Team §5NiX §7und §5Mistics §7danken für diesen schönen Contest, auch wenn wir in der letzten Minuten noch Panik hatten!");
         }
