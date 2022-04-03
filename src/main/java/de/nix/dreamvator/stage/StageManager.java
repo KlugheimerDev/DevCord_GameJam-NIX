@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -65,26 +66,34 @@ public class StageManager {
     }
 
     public enum Stage{
-        LOBBY(0, -13.5, -12.5),
-        STAGE1(1, -13.5, -12.5),
-        STAGE2(2, -53.5, -52.5),
-        STAGE3(3, -92.5, -91.5),
-        STAGE4(4, 83.5, 84.5),
-        STAGE5(5, 33, 34),
-        ENDE(6, -13.5, 12.5);
+        LOBBY(0, -13.5, -12.5,  new Location(Bukkit.getWorld("world"), -6.052, -40, -22.089)),
+        STAGE1(1, -13.5, -12.5,  new Location(Bukkit.getWorld("world"), -6.052, -40, -22.089)),
+        STAGE2(2, -53.5, -52.5,  new Location(Bukkit.getWorld("world"), -24, -41, 88.980)),
+        STAGE3(3, -92.5, -91.5,  new Location(Bukkit.getWorld("world"), -28.150, -60, 42.972)),
+        STAGE4(4, 83.5, 84.5,  new Location(Bukkit.getWorld("world"), 67.052, -59, -39)),
+        STAGE5(5, 33, 34,  new Location(Bukkit.getWorld("world"), -6.052, -40, -22.089)),
+        ENDE(6, -13.5, 12.5,  new Location(Bukkit.getWorld("world"), -6.052, -40, -22.089));
 
         private final int id;
         private final double x1;
         private final double x2;
 
-        Stage(int id, double x1, double x2) {
+        private final Location loc;
+
+        Stage(int id, double x1, double x2, Location loca) {
             this.id = id;
             this.x1 = x1;
             this.x2 = x2;
+
+            loc = loca;
         }
 
         public int getID() {
             return id;
+        }
+
+        public void teleportToElevator(Player player) {
+            player.teleport(loc);
         }
     }
 }
