@@ -4,6 +4,7 @@ import de.nix.dreamvator.Listener.CancelListener;
 import de.nix.dreamvator.cameras.CameraManager;
 import de.nix.dreamvator.checkpoint.CheckpointManager;
 import de.nix.dreamvator.elevator.ElevatorManager;
+import de.nix.dreamvator.features.LaserGun;
 import de.nix.dreamvator.features.WallClimb;
 import de.nix.dreamvator.misc.MetadataManager;
 import de.nix.dreamvator.signs.SignsManager;
@@ -42,6 +43,7 @@ public final class Dreamvator extends JavaPlugin {
         LobbyManager lobbyManager = new LobbyManager(this);
         cameraManager = new CameraManager(this);
         WallClimb wallClimb = new WallClimb(this);
+        LaserGun laserGun = new LaserGun(this);
 
         CancelListener cancelListener = new CancelListener(this);
 
