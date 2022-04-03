@@ -23,6 +23,8 @@ public class ElevatorManager implements Listener {
         this.elevators = new ArrayList<>();
 
         registerElevators();
+
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     private void registerElevators() {
@@ -31,8 +33,8 @@ public class ElevatorManager implements Listener {
         Bukkit.getConsoleSender().sendMessage(Dreamvator.PREFIX + "§aAufzüge wurden registriert");
     }
 
-    private void dispatch(Elevator elevator) {
-        elevator.getDoors().get(0).move(20);
+    public void dispatch(Elevator elevator) {
+        elevator.getDoors().get(0).move(false, 20);
     }
 
     @EventHandler
