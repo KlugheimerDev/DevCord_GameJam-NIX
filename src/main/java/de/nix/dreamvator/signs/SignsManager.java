@@ -1,9 +1,7 @@
 package de.nix.dreamvator.signs;
 
 import de.nix.dreamvator.Dreamvator;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.type.Door;
@@ -65,6 +63,17 @@ public class SignsManager implements Listener {
         }
     }
 
+    @EventHandler
+    public void onMove4324(PlayerMoveEvent event) {
+        if(event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.POLISHED_ANDESITE) || !event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.SMOOTH_STONE)) {
+            Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
+            if(!signHasString(signLoc, "[jumpscare]")) return;
+
+            event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_ENDERMAN_SCREAM, 1, 1);
+            event.getPlayer().spawnParticle(Particle.MOB_APPEARANCE, event.getPlayer().getLocation(), 1);
+        }
+    }
+
     String diamondPressed = "";
     String goldPressed = "";
     @EventHandler
@@ -115,8 +124,10 @@ public class SignsManager implements Listener {
         Pressed1 = "";
         Pressed2 = "";
 
-        Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(0));
-        Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(1));
+        if(Dreamvator.getPlayers() != null && Dreamvator.getPlayers().size() > 1) {
+            Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(0));
+            Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(1));
+        }
     }
 
 
