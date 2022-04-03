@@ -41,6 +41,10 @@ public class Elevator {
         return this;
     }
 
+    public void moveDoors(boolean open) {
+
+    }
+
     public List<ElevatorDoor> getDoors() {
         return doors;
     }

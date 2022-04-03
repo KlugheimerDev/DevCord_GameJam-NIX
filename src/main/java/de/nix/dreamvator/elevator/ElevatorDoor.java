@@ -50,7 +50,7 @@ public class ElevatorDoor {
         }
     }
 
-    public void move(int timeInTicks) {
+    public void move(boolean open, int timeInTicks) {
         if(blocks == null || blocks.isEmpty())
             return;
         this.time = time;
@@ -72,6 +72,7 @@ public class ElevatorDoor {
                 ticks++;
                 if(ticks < time) {
                     fallingBlocks.forEach(fallingBlock -> {
+                        //move
                         Bukkit.getOnlinePlayers().forEach(player -> {
                             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ticks + " " + fallingBlock.getBlockData().getMaterial()));
                         });

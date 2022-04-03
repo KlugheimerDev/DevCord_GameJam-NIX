@@ -24,6 +24,7 @@ public final class Dreamvator extends JavaPlugin {
     public static MetadataManager metadataManager;
     public static CheckpointManager checkpointManager;
     public static CameraManager cameraManager;
+    public static ElevatorManager elevatorManager;
 
     public static StageManager stageManager;
     private static List<Player> players;
@@ -37,7 +38,7 @@ public final class Dreamvator extends JavaPlugin {
         this.players = new ArrayList<>();
 
         SignsManager signsManager = new SignsManager(this);
-        ElevatorManager elevatorManager = new ElevatorManager(this);
+        elevatorManager = new ElevatorManager(this);
         LobbyManager lobbyManager = new LobbyManager(this);
         cameraManager = new CameraManager(this);
         WallClimb wallClimb = new WallClimb(this);
@@ -68,5 +69,9 @@ public final class Dreamvator extends JavaPlugin {
 
     public static List<Player> getPlayers() {
         return players;
+    }
+
+    public static ElevatorManager getElevatorManager() {
+        return elevatorManager;
     }
 }
