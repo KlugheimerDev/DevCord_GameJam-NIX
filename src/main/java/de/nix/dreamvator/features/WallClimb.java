@@ -18,9 +18,9 @@ public class WallClimb {
 
     public void start() {
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
-            if(Dreamvator.getPlayers() == null || Dreamvator.getPlayers().isEmpty())
+            if(Bukkit.getOnlinePlayers() == null || Bukkit.getOnlinePlayers().isEmpty())
                 return;
-            Dreamvator.getPlayers().forEach(player -> {
+            Bukkit.getOnlinePlayers().forEach(player -> {
                 if(isPlayerOnWall(player)) {
                     player.setVelocity(player.getVelocity().setY(0.25));
                 }
