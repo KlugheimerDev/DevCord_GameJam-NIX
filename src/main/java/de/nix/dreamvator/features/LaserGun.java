@@ -14,6 +14,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,25 +25,41 @@ public class LaserGun implements Listener {
     private boolean onePickedUp = false;
 
     World world = Bukkit.getWorld("world");
-    List<Block> blockList = Arrays.asList(world.getBlockAt(getLocation(69,-62,-16)), world.getBlockAt(getLocation(65,-60,-13)), world.getBlockAt(getLocation(68,-57,-13)),
-            world.getBlockAt(68, 62, -11), world.getBlockAt(65,-58,-11), world.getBlockAt(66, -63, -8), world.getBlockAt(67, -56, -8));
+    ArrayList<Block> blockList = new ArrayList<>();
 
 
     public LaserGun(Plugin plugin) {
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
+
+        blockList.add(world.getBlockAt(getLocation(69,-62,-16)));
+        blockList.add(world.getBlockAt(getLocation(65,-60,-13)));
+        blockList.add(world.getBlockAt(getLocation(68,-57,-13)));
+        blockList.add(world.getBlockAt(68, 62, -11));
+        blockList.add(world.getBlockAt(65,-58,-11));
+        blockList.add(world.getBlockAt(66, -63, -8));
+        blockList.add(world.getBlockAt(67, -56, -8));
     }
 
     @EventHandler
     public void onLeftClick(PlayerInteractEvent event) {
-        if(event.getAction() != Action.LEFT_CLICK_AIR || event.getAction() != Action.LEFT_CLICK_BLOCK)  return;
-        if(event.getItem() == null || !Dreamvator.getPlayers().contains(event.getPlayer())) return;
-        if(!event.getItem().getType().toString().contains("AXE")) return;
+        Bukkit.broadcastMessage("lol1");
 
-        if(event.getItem().getType() == Material.DIAMOND_AXE) {
-            shoot(Dreamvator.getPlayers().get(1));
-        } else if(event.getItem().getType() == Material.GOLDEN_AXE) {
-            shoot(Dreamvator.getPlayers().get(0));
+        if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+            Bukkit.broadcastMessage("lol2");
+
+            if(event.getItem() == null) return;
+            Bukkit.broadcastMessage("lol3");
+
+            if(!event.getItem().getType().toString().contains("AXE")) return;
+
+            Bukkit.broadcastMessage("lol4");
+
+            if(event.getItem().getType() == Material.DIAMOND_AXE) {
+                shoot(Dreamvator.getPlayers().get(1));
+            } else if(event.getItem().getType() == Material.GOLDEN_AXE) {
+                shoot(Dreamvator.getPlayers().get(0));
+            }
         }
     }
 
