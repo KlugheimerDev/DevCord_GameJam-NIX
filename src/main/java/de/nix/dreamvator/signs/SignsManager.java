@@ -88,7 +88,7 @@ public class SignsManager implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
-        Dreamvator.checkpointManager.teleportToRespawnLocation(event.getEntity());
+        event.getEntity().teleport(Dreamvator.checkpointManager.getCheckPoint(event.getEntity()));
     }
 
     //Checkt ob ein Schild (an der location) in der ersten Zeile den String "str" besitzt
