@@ -1,8 +1,6 @@
 package de.nix.dreamvator.features;
 
 import de.nix.dreamvator.Dreamvator;
-import de.nix.dreamvator.stage.StageChangeEvent;
-import de.nix.dreamvator.stage.StageManager;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
@@ -15,8 +13,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class LaserGun implements Listener {
 

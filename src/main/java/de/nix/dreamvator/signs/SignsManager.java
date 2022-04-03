@@ -99,6 +99,32 @@ public class SignsManager implements Listener {
         }
     }
 
+    String Pressed1 = "";
+    String Pressed2 = "";
+    @EventHandler
+    public void onMove3(PlayerMoveEvent event) {
+        if(!event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.ACACIA_WOOD)) {
+            if(!Pressed1.equalsIgnoreCase("") || !Pressed2.equalsIgnoreCase(""))
+                if(Pressed1.equalsIgnoreCase(event.getPlayer().getDisplayName())) Pressed2 = "";
+            if(Pressed2.equalsIgnoreCase(event.getPlayer().getDisplayName())) Pressed2 = "";
+        }
+
+        Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
+        if(!signHasString(signLoc, "[lasergun]")) return;
+
+        if(getLineToString(signLoc, 1).equalsIgnoreCase("golden")) Pressed2 = event.getPlayer().getDisplayName();
+        if(getLineToString(signLoc, 1).equalsIgnoreCase("diamond")) Pressed1 = event.getPlayer().getDisplayName();
+
+        if(!Pressed1.equalsIgnoreCase("") && !Pressed2.equalsIgnoreCase("")) {
+            Pressed1 = "";
+            Pressed2 = "";
+
+            Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(0));
+            Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(1));
+        }
+    }
+
+
     String onePressed = "";
     String secondPressed = "";
     @EventHandler
