@@ -27,6 +27,13 @@ public class CameraManager {
     public void registerCameras() {
         this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),-13, -59, 38), CameraType.SCIENTIST));
         this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),-1, -36.5, -19), CameraType.CAMERA));
+        this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),-86, -55.5, -69), CameraType.CAMERA));
+        this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),83, -55.5, -89), CameraType.CAMERA));
+        this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),64, -55.5, -34), CameraType.CAMERA));
+        this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),69, -54.5, -29), CameraType.CAMERA));
+        this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),-25, -36.5, 105), CameraType.CAMERA));
+        this.cameras.add(new Camera(plugin, new Location(Bukkit.getWorld("world"),-39, -34.5, 99), CameraType.CAMERA));
+
     }
 
     public void disable() {
