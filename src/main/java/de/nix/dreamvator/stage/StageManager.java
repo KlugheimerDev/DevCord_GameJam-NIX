@@ -39,7 +39,7 @@ public class StageManager {
         stageSwitch = false;
 
         if(currentStage.getID() == 2)
-            Bukkit.broadcastMessage(Dreamvator.PREFIX + "§7");
+            Bukkit.broadcastMessage("§7" + Dreamvator.getPlayers().get(0).getDisplayName() + "§7 » §r§fWaren wir nicht hier schonmal?");
 
         if(currentStage.getID() == 4) {
             World world = Bukkit.getWorld("world");
