@@ -1,6 +1,5 @@
 package de.nix.dreamvator.features;
 
-import de.nix.dreamvator.Dreamvator;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
