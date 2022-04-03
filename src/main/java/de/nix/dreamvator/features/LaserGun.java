@@ -35,7 +35,7 @@ public class LaserGun implements Listener {
         blockList.add(world.getBlockAt(getLocation(69,-62,-16)));
         blockList.add(world.getBlockAt(getLocation(65,-60,-13)));
         blockList.add(world.getBlockAt(getLocation(68,-57,-13)));
-        blockList.add(world.getBlockAt(68, 62, -11));
+        blockList.add(world.getBlockAt(68, -62, -11));
         blockList.add(world.getBlockAt(65,-58,-11));
         blockList.add(world.getBlockAt(66, -63, -8));
         blockList.add(world.getBlockAt(67, -56, -8));
