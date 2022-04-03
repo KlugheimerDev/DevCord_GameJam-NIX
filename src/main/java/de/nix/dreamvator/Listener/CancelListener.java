@@ -1,6 +1,5 @@
 package de.nix.dreamvator.Listener;
 
-import de.nix.dreamvator.Dreamvator;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
