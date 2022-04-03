@@ -112,16 +112,11 @@ public class SignsManager implements Listener {
         Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
         if(!signHasString(signLoc, "[el]")) return;
 
-        if(getLineToString(signLoc, 1).equalsIgnoreCase("golden")) Pressed2 = event.getPlayer().getDisplayName();
-        if(getLineToString(signLoc, 1).equalsIgnoreCase("diamond")) Pressed1 = event.getPlayer().getDisplayName();
+        Pressed1 = "";
+        Pressed2 = "";
 
-        if(!Pressed1.equalsIgnoreCase("") && !Pressed2.equalsIgnoreCase("")) {
-            Pressed1 = "";
-            Pressed2 = "";
-
-            Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(0));
-            Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(1));
-        }
+        Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(0));
+        Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(1));
     }
 
 

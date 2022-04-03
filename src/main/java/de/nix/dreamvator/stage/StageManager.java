@@ -38,8 +38,6 @@ public class StageManager {
         Stage[] stages = Stage.values();
         currentStage = stages[id];
 
-        Bukkit.broadcastMessage("currentStage :" + currentStage.getID());
-
         StageChangeEvent event = new StageChangeEvent(currentStage);
         Bukkit.getPluginManager().callEvent(event);
         stageSwitch = false;
