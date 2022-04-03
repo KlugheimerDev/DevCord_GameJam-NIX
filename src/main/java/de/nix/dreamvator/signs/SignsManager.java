@@ -91,9 +91,9 @@ public class SignsManager implements Listener {
             dHoe.setItemMeta(itemMeta);
             Dreamvator.getPlayers().get(0).getInventory().setItem(1, dHoe);
 
-            ItemStack hoe = new ItemStack(Material.DIAMOND_AXE);
+            ItemStack hoe = new ItemStack(Material.GOLDEN_AXE);
             ItemMeta itemMetaD = hoe.getItemMeta();
-            itemMetaD.setDisplayName("§6Pfeilspucker");
+            itemMetaD.setDisplayName("§6Lasergun");
             hoe.setItemMeta(itemMetaD);
             Dreamvator.getPlayers().get(1).getInventory().setItem(1, hoe);
         }

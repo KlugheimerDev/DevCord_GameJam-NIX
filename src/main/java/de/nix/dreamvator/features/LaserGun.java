@@ -33,7 +33,6 @@ public class LaserGun implements Listener {
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
-    boolean firstShot;
     @EventHandler
     public void onLeftClick(PlayerInteractEvent event) {
         if(event.getAction() != Action.LEFT_CLICK_AIR || event.getAction() != Action.LEFT_CLICK_BLOCK)  return;
@@ -56,10 +55,10 @@ public class LaserGun implements Listener {
             event.getHitBlock().setType(Material.DIAMOND_BLOCK);
 
             if(blockList.size() == 0) {
-                world.getBlockAt(63,-59,-26).setType(Material.AIR);
-                world.getBlockAt(63,-59,-27).setType(Material.AIR);
-                world.getBlockAt(63,-58,-26).setType(Material.AIR);
-                world.getBlockAt(63,-58,-27).setType(Material.AIR);
+                world.getBlockAt(70,-59,-26).setType(Material.AIR);
+                world.getBlockAt(70,-59,-27).setType(Material.AIR);
+                world.getBlockAt(70,-58,-26).setType(Material.AIR);
+                world.getBlockAt(70,-58,-27).setType(Material.AIR);
             }
         }
     }

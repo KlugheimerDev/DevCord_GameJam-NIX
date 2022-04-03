@@ -28,8 +28,6 @@ public class StageManager {
     }
 
     public void setCurrentStage(int id) {
-        if(stageSwitch) return;
-        stageSwitch = true;
         Dreamvator.getPlayers().get(0).teleport(new Location(Dreamvator.getPlayers().get(0).getWorld(),currentStage.x1, -58, -61, -70, 68));
         Dreamvator.getPlayers().get(1).teleport(new Location(Dreamvator.getPlayers().get(1).getWorld(),currentStage.x2, -58, -61, 55, 68));
 
@@ -47,6 +45,8 @@ public class StageManager {
     }
 
     private void throwEffect() {
+        if(stageSwitch) return;
+        stageSwitch = true;
         Dreamvator.getPlayers().forEach(player -> {
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 60, 1, false, false, false));
             player.setVelocity(BlockFace.EAST.getDirection().multiply(2).setY(0.2));
