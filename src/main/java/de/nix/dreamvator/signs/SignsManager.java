@@ -38,39 +38,43 @@ public class SignsManager implements Listener {
 
     @EventHandler
     public void onDoorRightClick(PlayerInteractEvent event) {
-        if(!event.hasBlock() || event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getClickedBlock().getType().toString().contains("TRAP") || !event.getClickedBlock().getType().toString().contains("DOOR")) return;
-        int checkBlock = ((Door) event.getClickedBlock().getBlockData()).getHalf().toString().contains("TOP") ? -3 : -2;
+        if(Dreamvator.getPlayers().contains(event.getPlayer())) {
+            if(!event.hasBlock() || event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getClickedBlock().getType().toString().contains("TRAP") || !event.getClickedBlock().getType().toString().contains("DOOR")) return;
+            int checkBlock = ((Door) event.getClickedBlock().getBlockData()).getHalf().toString().contains("TOP") ? -3 : -2;
 
-        if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[lock]")) {
-            event.setCancelled(true);
-        }
+            if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[lock]")) {
+                event.setCancelled(true);
+            }
 
-        if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[doorWhat]")) {
-            Sign sign = (Sign) event.getClickedBlock().getLocation().add(0, checkBlock, 0).getBlock().getState();
-            String[] locStrings = sign.getLine(2).split(",");
-            try {
-                Location loc = new Location(event.getPlayer().getWorld(), Double.parseDouble(locStrings[0]), Double.parseDouble(locStrings[1]), Double.parseDouble(locStrings[2]));
-                Door otherDoor = (Door) loc.getBlock().getBlockData();
-                if(sign.getLine(1).contains("sync")) {
-                    otherDoor.setOpen(!((Door) event.getClickedBlock().getBlockData()).isOpen());
-                } else if(sign.getLine(1).contains("switch")) {
-                    otherDoor.setOpen(((Door) event.getClickedBlock().getBlockData()).isOpen());
-                }
+            if(signHasString(event.getClickedBlock().getLocation().add(0, checkBlock, 0), "[doorWhat]")) {
+                Sign sign = (Sign) event.getClickedBlock().getLocation().add(0, checkBlock, 0).getBlock().getState();
+                String[] locStrings = sign.getLine(2).split(",");
+                try {
+                    Location loc = new Location(event.getPlayer().getWorld(), Double.parseDouble(locStrings[0]), Double.parseDouble(locStrings[1]), Double.parseDouble(locStrings[2]));
+                    Door otherDoor = (Door) loc.getBlock().getBlockData();
+                    if(sign.getLine(1).contains("sync")) {
+                        otherDoor.setOpen(!((Door) event.getClickedBlock().getBlockData()).isOpen());
+                    } else if(sign.getLine(1).contains("switch")) {
+                        otherDoor.setOpen(((Door) event.getClickedBlock().getBlockData()).isOpen());
+                    }
 
-                loc.getBlock().setBlockData(otherDoor);
-            } catch (Exception e) {}
+                    loc.getBlock().setBlockData(otherDoor);
+                } catch (Exception e) {}
 
+            }
         }
     }
 
     @EventHandler
     public void onMove4324(PlayerMoveEvent event) {
-        if(event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.POLISHED_ANDESITE) || !event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.SMOOTH_STONE)) {
-            Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
-            if(!signHasString(signLoc, "[jumpscare]")) return;
+        if(Dreamvator.getPlayers().contains(event.getPlayer())) {
+            if(event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.POLISHED_ANDESITE) || !event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.SMOOTH_STONE)) {
+                Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
+                if(!signHasString(signLoc, "[jumpscare]")) return;
 
-            event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_ENDERMAN_SCREAM, 1, 1);
-            event.getPlayer().spawnParticle(Particle.MOB_APPEARANCE, event.getPlayer().getLocation(), 1);
+                event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.ENTITY_ENDERMAN_SCREAM, 1, 1);
+                event.getPlayer().spawnParticle(Particle.MOB_APPEARANCE, event.getPlayer().getLocation(), 1);
+            }
         }
     }
 
@@ -78,33 +82,35 @@ public class SignsManager implements Listener {
     String goldPressed = "";
     @EventHandler
     public void onMove2(PlayerMoveEvent event) {
-        if(!event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.BONE_BLOCK)) {
-            if(!diamondPressed.equalsIgnoreCase("") || !goldPressed.equalsIgnoreCase(""))
-                if(diamondPressed.equalsIgnoreCase(event.getPlayer().getDisplayName())) goldPressed = "";
+        if(Dreamvator.getPlayers().contains(event.getPlayer())) {
+            if(!event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.BONE_BLOCK)) {
+                if(!diamondPressed.equalsIgnoreCase("") || !goldPressed.equalsIgnoreCase(""))
+                    if(diamondPressed.equalsIgnoreCase(event.getPlayer().getDisplayName())) goldPressed = "";
                 if(goldPressed.equalsIgnoreCase(event.getPlayer().getDisplayName())) goldPressed = "";
-        }
+            }
 
-        Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
-        if(!signHasString(signLoc, "[lasergun]")) return;
+            Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
+            if(!signHasString(signLoc, "[lasergun]")) return;
 
-        if(getLineToString(signLoc, 1).equalsIgnoreCase("golden")) goldPressed = event.getPlayer().getDisplayName();
-        if(getLineToString(signLoc, 1).equalsIgnoreCase("diamond")) diamondPressed = event.getPlayer().getDisplayName();
+            if(getLineToString(signLoc, 1).equalsIgnoreCase("golden")) goldPressed = event.getPlayer().getDisplayName();
+            if(getLineToString(signLoc, 1).equalsIgnoreCase("diamond")) diamondPressed = event.getPlayer().getDisplayName();
 
-        if(!diamondPressed.equalsIgnoreCase("") && !goldPressed.equalsIgnoreCase("")) {
-            diamondPressed = "";
-            goldPressed = "";
+            if(!diamondPressed.equalsIgnoreCase("") && !goldPressed.equalsIgnoreCase("")) {
+                diamondPressed = "";
+                goldPressed = "";
 
-            ItemStack dHoe = new ItemStack(Material.DIAMOND_AXE);
-            ItemMeta itemMeta = dHoe.getItemMeta();
-            itemMeta.setDisplayName("§1Lasergun");
-            dHoe.setItemMeta(itemMeta);
-            Dreamvator.getPlayers().get(0).getInventory().setItem(1, dHoe);
+                ItemStack dHoe = new ItemStack(Material.DIAMOND_AXE);
+                ItemMeta itemMeta = dHoe.getItemMeta();
+                itemMeta.setDisplayName("§1Lasergun");
+                dHoe.setItemMeta(itemMeta);
+                Dreamvator.getPlayers().get(0).getInventory().setItem(1, dHoe);
 
-            ItemStack hoe = new ItemStack(Material.GOLDEN_AXE);
-            ItemMeta itemMetaD = hoe.getItemMeta();
-            itemMetaD.setDisplayName("§6Lasergun");
-            hoe.setItemMeta(itemMetaD);
-            Dreamvator.getPlayers().get(1).getInventory().setItem(1, hoe);
+                ItemStack hoe = new ItemStack(Material.GOLDEN_AXE);
+                ItemMeta itemMetaD = hoe.getItemMeta();
+                itemMetaD.setDisplayName("§6Lasergun");
+                hoe.setItemMeta(itemMetaD);
+                Dreamvator.getPlayers().get(1).getInventory().setItem(1, hoe);
+            }
         }
     }
 
@@ -112,21 +118,23 @@ public class SignsManager implements Listener {
     String Pressed2 = "";
     @EventHandler
     public void onMove3(PlayerMoveEvent event) {
-        if(!event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.ACACIA_WOOD)) {
-            if(!Pressed1.equalsIgnoreCase("") || !Pressed2.equalsIgnoreCase(""))
-                if(Pressed1.equalsIgnoreCase(event.getPlayer().getDisplayName())) Pressed2 = "";
-            if(Pressed2.equalsIgnoreCase(event.getPlayer().getDisplayName())) Pressed2 = "";
-        }
+        if(Dreamvator.getPlayers().contains(event.getPlayer())) {
+            if(!event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.ACACIA_WOOD)) {
+                if(!Pressed1.equalsIgnoreCase("") || !Pressed2.equalsIgnoreCase(""))
+                    if(Pressed1.equalsIgnoreCase(event.getPlayer().getDisplayName())) Pressed2 = "";
+                if(Pressed2.equalsIgnoreCase(event.getPlayer().getDisplayName())) Pressed2 = "";
+            }
 
-        Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
-        if(!signHasString(signLoc, "[el]")) return;
+            Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
+            if(!signHasString(signLoc, "[el]")) return;
 
-        Pressed1 = "";
-        Pressed2 = "";
+            Pressed1 = "";
+            Pressed2 = "";
 
-        if(Dreamvator.getPlayers() != null && Dreamvator.getPlayers().size() > 1) {
-            Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(0));
-            Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(1));
+            if(Dreamvator.getPlayers() != null && Dreamvator.getPlayers().size() > 1) {
+                Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(0));
+                Dreamvator.stageManager.getCurrentStage().teleportToElevator(Dreamvator.getPlayers().get(1));
+            }
         }
     }
 
