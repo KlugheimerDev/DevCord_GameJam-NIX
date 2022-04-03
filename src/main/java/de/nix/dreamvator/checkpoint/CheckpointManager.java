@@ -4,32 +4,29 @@ import de.nix.dreamvator.Dreamvator;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.plugin.Plugin;
 
 public class CheckpointManager implements Listener {
-    //Checkpoint-metaData Aufbau:  "checkpoint"  "checkpointNummer,x,y,z"
 
-    public void setPlayersCheckpoint(Player player, int checkpointLevel) {
-        String value = checkpointLevel + "," + player.getLocation().getX() + "," + player.getLocation().getY() + "," + player.getLocation().getZ();
+    private Plugin plugin;
 
+    public CheckpointManager(Plugin plugin) {
+        this.plugin = plugin;
+    }
+
+    public void setCheckPoint(Player player, int checkPoint, Location location) {
         if(!player.hasMetadata("checkpoint"))
-            Dreamvator.metadataManager.setMetadata(player, "checkpoint", value);
-
-        else if(Integer.parseInt(player.getMetadata("checkpoint").get(0).asString().substring(0, 1)) < checkpointLevel)
-            Dreamvator.metadataManager.setMetadata(player, "checkpoint", value);
+            Dreamvator.metadataManager.setMetadata(player, "checkpoint", 0);
+        player.getMetadata("checkpoint").set(0, new FixedMetadataValue(plugin, checkPoint));
+        player.getMetadata("checkpoint").set(1, new FixedMetadataValue(plugin, location));
     }
 
-    public void teleportToRespawnLocation(Player player) {
-        player.teleport(getPlayersRespawnLocation(player));
+    public Location getCheckPoint(Player player) {
+        if(player.hasMetadata("checkpoint")) {
+            return (Location) player.getMetadata("checkpoint").get(1);
+        }
+        return new Location(player.getWorld(), -12.5, -59, -37.5, -90, 0);
     }
 
-    public void removePlayerMetaData(Player player) {
-        Dreamvator.metadataManager.removeMetadata(player,"checkpoint");
-    }
-
-    public Location getPlayersRespawnLocation(Player player) {
-        if(!player.hasMetadata("checkpoint")) return player.getLocation();
-        String[] metaStrings = player.getMetadata("checkpoint").get(0).asString().split(",");
-
-        return new Location(player.getWorld(), Double.parseDouble(metaStrings[1]), Double.parseDouble(metaStrings[2]), Double.parseDouble(metaStrings[3]));
-    }
 }

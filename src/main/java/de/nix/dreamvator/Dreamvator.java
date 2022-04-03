@@ -46,7 +46,7 @@ public final class Dreamvator extends JavaPlugin {
 
         stageManager = new StageManager(this);
         metadataManager = new MetadataManager(this);
-        checkpointManager = new CheckpointManager();
+        checkpointManager = new CheckpointManager(this);
 
         Bukkit.getConsoleSender().sendMessage(PREFIX + "§aDer Aufzug wurde gestartet");
         Bukkit.getConsoleSender().sendMessage(PREFIX + "§cINFO: Die Main-World MUSS 'world' heißen, ansonsten ist die Map nicht spielbar");
