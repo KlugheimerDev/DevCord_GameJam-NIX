@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +31,7 @@ public class LaserGun implements Listener {
 
     @EventHandler
     public void onStageChange(StageChangeEvent event) {
-        if(event.getStage() == StageManager.Stage.STAGE3) {
+        if(event.getStage().getID() == 3) {
             Bukkit.getWorld("world").dropItem(new Location(Bukkit.getWorld("world"), -25, -59, 10), getDiamondGun());
             Bukkit.getWorld("world").dropItem(new Location(Bukkit.getWorld("world"), -25, -59, 13), getGoldenGun());
 
@@ -49,11 +50,15 @@ public class LaserGun implements Listener {
             if(((Player) event.getEntity()).getInventory().contains(getGoldenGun())) {
                 event.setCancelled(true);
                 return;
+            } else {
+                diamondOwner = ((Player) event.getEntity());
             }
         } else if(itm == getGoldenGun()) {
             if(((Player) event.getEntity()).getInventory().contains(getDiamondGun())) {
                 event.setCancelled(true);
                 return;
+            } else {
+                goldOwner = ((Player) event.getEntity());
             }
         }
 
@@ -68,33 +73,50 @@ public class LaserGun implements Listener {
         }
     }
 
+    Player diamondOwner;
+    Player goldOwner;
+    boolean firstShot;
     @EventHandler
     public void onLeftClick(PlayerInteractEvent event) {
         if(event.getAction() != Action.LEFT_CLICK_AIR || event.getAction() != Action.LEFT_CLICK_BLOCK)  return;
         if(event.getItem() == null || !Dreamvator.getPlayers().contains(event.getPlayer())) return;
-        if(!event.getItem().getType().toString().contains("HOE")) return;
+        if(!event.getItem().getType().toString().contains("AXE")) return;
         event.setCancelled(true);
 
-        if(event.getItem().getType() == Material.DIAMOND_HOE) {
+        if(event.getItem().getType() == Material.DIAMOND_AXE) {
+            shoot(goldOwner);
+        } else if(event.getItem().getType() == Material.GOLDEN_AXE) {
+            shoot(diamondOwner);
+        }
 
+        if(!firstShot) {
+            firstShot = true;
+            //hier irgendein Kommentar einbauen vom andern Spieler
         }
     }
 
     private ItemStack getDiamondGun() {
-        ItemStack hoe = new ItemStack(Material.DIAMOND_HOE);
+        ItemStack hoe = new ItemStack(Material.DIAMOND_AXE);
         ItemMeta itemMeta = hoe.getItemMeta();
-        itemMeta.setDisplayName("§1Lasergun");
+        itemMeta.setDisplayName("§1Pfeilspucker");
 
         hoe.setItemMeta(itemMeta);
         return hoe;
     }
 
     private ItemStack getGoldenGun() {
-        ItemStack hoe = new ItemStack(Material.DIAMOND_HOE);
+        ItemStack hoe = new ItemStack(Material.DIAMOND_AXE);
         ItemMeta itemMeta = hoe.getItemMeta();
-        itemMeta.setDisplayName("§6Lasergun");
+        itemMeta.setDisplayName("§6Pfeilspucker");
 
         hoe.setItemMeta(itemMeta);
         return hoe;
+    }
+
+    private void shoot(Player player) {
+        Arrow arrow = (Arrow) player.launchProjectile(Arrow.class);
+        arrow.setVelocity(arrow.getVelocity().multiply(1));
+        arrow.setGravity(false);
+        arrow.setSilent(true);
     }
 }
