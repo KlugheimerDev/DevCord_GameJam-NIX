@@ -12,10 +12,11 @@ import org.bukkit.potion.PotionEffectType;
 public class StageManager {
 
     //Bett 1: -14, -59, -61
-    //Bett 2: -13, -59, -61
 
     private Dreamvator plugin;
     private Stage currentStage;
+
+    private boolean stageSwitch = false;
 
     public StageManager(Dreamvator plugin) {
         this.plugin = plugin;
@@ -27,6 +28,8 @@ public class StageManager {
     }
 
     public void setCurrentStage(int id) {
+        if(stageSwitch) return;
+        stageSwitch = true;
         Dreamvator.getPlayers().get(0).teleport(new Location(Dreamvator.getPlayers().get(0).getWorld(),currentStage.x1, -58, -61, -70, 68));
         Dreamvator.getPlayers().get(1).teleport(new Location(Dreamvator.getPlayers().get(1).getWorld(),currentStage.x2, -58, -61, 55, 68));
 
@@ -40,6 +43,7 @@ public class StageManager {
 
         StageChangeEvent event = new StageChangeEvent(currentStage);
         Bukkit.getPluginManager().callEvent(event);
+        stageSwitch = false;
     }
 
     private void throwEffect() {
