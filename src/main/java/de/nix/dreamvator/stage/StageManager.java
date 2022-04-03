@@ -12,8 +12,6 @@ import org.bukkit.potion.PotionEffectType;
 
 public class StageManager {
 
-    //Bett 1: -14, -59, -61
-
     private Dreamvator plugin;
     private Stage currentStage;
 
@@ -41,6 +39,10 @@ public class StageManager {
         StageChangeEvent event = new StageChangeEvent(currentStage);
         Bukkit.getPluginManager().callEvent(event);
         stageSwitch = false;
+
+        if(currentStage.getID() == 6) {
+            Bukkit.broadcastMessage(Dreamvator.PREFIX + "§7Danke für's spielen unserer Map! Das Team §5NiX §7und §5Mistics §7danken für diesen schönen Contest, auch wenn wir in der letzten Minuten noch Panik hatten!");
+        }
     }
 
     private void throwEffect() {
