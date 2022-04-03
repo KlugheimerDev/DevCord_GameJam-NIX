@@ -35,6 +35,9 @@ public class StageManager {
 
         Stage[] stages = Stage.values();
         currentStage = stages[id];
+
+        StageChangeEvent event = new StageChangeEvent(currentStage);
+        Bukkit.getPluginManager().callEvent(event);
     }
 
     private void throwEffect() {
