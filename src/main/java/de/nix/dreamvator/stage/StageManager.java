@@ -92,8 +92,23 @@ public class StageManager {
         }
 
         if(currentStage.getID() == 6) {
-            Bukkit.broadcastMessage(Dreamvator.PREFIX + "§7Danke für's spielen unserer Map! Das Team §5NiX §7und §5Mistics §7danken für diesen schönen Contest, auch wenn wir in den letzten Minuten noch Panik hatten!");
+            Bukkit.broadcastMessage(Dreamvator.PREFIX + "§7Danke für's spielen unserer Map! Das Team §dNiX §7und §dMistics §7danken für diesen schönen Contest, auch wenn wir in den letzten Minuten noch Panik hatten!");
+            restart(15);
         }
+    }
+
+    public void restart(int time) {
+        Bukkit.broadcastMessage("\n" + Dreamvator.PREFIX + "§7Der Traum startet in §9" + time + " Sekunden§7 neu.§r\n");
+
+        Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+            @Override
+            public void run() {
+                Bukkit.getOnlinePlayers().forEach(player -> {
+                    player.kickPlayer(Dreamvator.PREFIX + "§7Traum wird neu geladen..");
+                });
+                Bukkit.getServer().reload();
+            }
+        }, 20*time);
     }
 
     private void closeDoor(int x, int y, int z) {

@@ -35,7 +35,7 @@ public class LobbyManager implements Listener {
 
         if(lobbyStage) {
             event.getPlayer().teleport(new Location(player.getWorld(), -12.5, -59, -37.5, -90, 0));
-            event.setJoinMessage(Dreamvator.PREFIX + "§2" + player.getDisplayName() + " §r§7hat das Spiel betreten!");
+            event.setJoinMessage(Dreamvator.PREFIX + "§2" + player.getDisplayName() + " §7hat das Spiel betreten!");
             player.setGameMode(GameMode.ADVENTURE);
             if (Dreamvator.getPlayers().size() < 2) {
                 Dreamvator.getPlayers().add(player);
@@ -53,8 +53,12 @@ public class LobbyManager implements Listener {
         event.setQuitMessage("");
         Player player = event.getPlayer();
         if(lobbyStage) {
-            event.setQuitMessage(Dreamvator.PREFIX + "§4" + player.getDisplayName() + " §r§7hat das Spiel verlassen!");
+            event.setQuitMessage(Dreamvator.PREFIX + "§4" + player.getDisplayName() + " §7hat das Spiel verlassen!");
             Dreamvator.getPlayers().remove(player);
+        }
+
+        if(Dreamvator.getPlayers().size() <= 1 || Bukkit.getOnlinePlayers().size() == 0) {
+            Dreamvator.stageManager.restart(1);
         }
     }
 
