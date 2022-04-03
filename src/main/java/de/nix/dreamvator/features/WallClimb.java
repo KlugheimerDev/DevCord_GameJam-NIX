@@ -1,6 +1,5 @@
 package de.nix.dreamvator.features;
 
-import de.nix.dreamvator.Dreamvator;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -18,9 +17,9 @@ public class WallClimb {
 
     public void start() {
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
-            if(Dreamvator.getPlayers() == null || Dreamvator.getPlayers().isEmpty())
+            if(Bukkit.getOnlinePlayers() == null || Bukkit.getOnlinePlayers().isEmpty())
                 return;
-            Dreamvator.getPlayers().forEach(player -> {
+            Bukkit.getOnlinePlayers().forEach(player -> {
                 if(isPlayerOnWall(player)) {
                     player.setVelocity(player.getVelocity().setY(0.25));
                 }
