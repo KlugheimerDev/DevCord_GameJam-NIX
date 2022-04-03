@@ -62,8 +62,6 @@ public class LaserGun implements Listener {
             blockList.remove(event.getHitBlock());
             event.getHitBlock().setType(Material.DIAMOND_BLOCK);
 
-            event.getEntity().remove();
-
             if(blockList.size() == 0) {
                 world.getBlockAt(70,-59,-26).setType(Material.AIR);
                 world.getBlockAt(70,-59,-27).setType(Material.AIR);
@@ -71,6 +69,7 @@ public class LaserGun implements Listener {
                 world.getBlockAt(70,-58,-27).setType(Material.AIR);
             }
         }
+        event.getEntity().remove();
     }
 
     private Location getLocation(int i, int i1, int i2) {
