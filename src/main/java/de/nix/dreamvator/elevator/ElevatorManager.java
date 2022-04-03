@@ -3,17 +3,13 @@ package de.nix.dreamvator.elevator;
 import de.nix.dreamvator.Dreamvator;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ElevatorManager implements Listener {
+public class ElevatorManager {
 
     private Plugin plugin;
     private List<Elevator> elevators;
@@ -23,8 +19,6 @@ public class ElevatorManager implements Listener {
         this.elevators = new ArrayList<>();
 
         registerElevators();
-
-        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     private void registerElevators() {
@@ -35,20 +29,6 @@ public class ElevatorManager implements Listener {
 
     public void dispatch(Elevator elevator) {
         elevator.getDoors().get(0).move(false, 20);
-    }
-
-    @EventHandler
-    public void dropItem(PlayerDropItemEvent e) {
-        if(e.getItemDrop().getItemStack().getType().equals(Material.SCUTE)) {
-            if(elevators != null && !elevators.isEmpty()) {
-                dispatch(elevators.get(0));
-            }
-        }
-        if(e.getItemDrop().getItemStack().getType().equals(Material.REDSTONE_TORCH)) {
-            if(elevators != null && !elevators.isEmpty()) {
-                elevators.get(0).getDoors().get(0).reset();
-            }
-        }
     }
 
 }
