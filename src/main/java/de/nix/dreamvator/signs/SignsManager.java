@@ -15,6 +15,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 public class SignsManager implements Listener {
@@ -60,6 +62,40 @@ public class SignsManager implements Listener {
                 loc.getBlock().setBlockData(otherDoor);
             } catch (Exception e) {}
 
+        }
+    }
+
+    String diamondPressed = "";
+    String goldPressed = "";
+    @EventHandler
+    public void onMove2(PlayerMoveEvent event) {
+        if(!event.getPlayer().getLocation().add(0, -1, 0).getBlock().getType().equals(Material.BONE_BLOCK)) {
+            if(!diamondPressed.equalsIgnoreCase("") || !goldPressed.equalsIgnoreCase(""))
+                if(diamondPressed.equalsIgnoreCase(event.getPlayer().getDisplayName())) goldPressed = "";
+                if(goldPressed.equalsIgnoreCase(event.getPlayer().getDisplayName())) goldPressed = "";
+        }
+
+        Location signLoc = event.getPlayer().getLocation().add(0, -2, 0);
+        if(!signHasString(signLoc, "[lasergun]")) return;
+
+        if(getLineToString(signLoc, 1).equalsIgnoreCase("golden")) goldPressed = event.getPlayer().getDisplayName();
+        if(getLineToString(signLoc, 1).equalsIgnoreCase("diamond")) diamondPressed = event.getPlayer().getDisplayName();
+
+        if(!diamondPressed.equalsIgnoreCase("") && !goldPressed.equalsIgnoreCase("")) {
+            diamondPressed = "";
+            goldPressed = "";
+
+            ItemStack dHoe = new ItemStack(Material.DIAMOND_AXE);
+            ItemMeta itemMeta = dHoe.getItemMeta();
+            itemMeta.setDisplayName("§1Lasergun");
+            dHoe.setItemMeta(itemMeta);
+            Dreamvator.getPlayers().get(0).getInventory().setItem(1, dHoe);
+
+            ItemStack hoe = new ItemStack(Material.DIAMOND_AXE);
+            ItemMeta itemMetaD = hoe.getItemMeta();
+            itemMetaD.setDisplayName("§6Pfeilspucker");
+            hoe.setItemMeta(itemMetaD);
+            Dreamvator.getPlayers().get(1).getInventory().setItem(1, hoe);
         }
     }
 
