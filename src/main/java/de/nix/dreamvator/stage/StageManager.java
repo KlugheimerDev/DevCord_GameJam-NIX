@@ -1,9 +1,7 @@
 package de.nix.dreamvator.stage;
 
 import de.nix.dreamvator.Dreamvator;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -42,6 +40,29 @@ public class StageManager {
 
         if(currentStage.getID() == 2)
             Bukkit.broadcastMessage(Dreamvator.PREFIX + "§7");
+
+        if(currentStage.getID() == 4) {
+            World world = Bukkit.getWorld("world");
+
+            world.getBlockAt(70,-59,-26).setType(Material.GRAY_CONCRETE);
+            world.getBlockAt(70,-59,-27).setType(Material.GRAY_CONCRETE);
+            world.getBlockAt(70,-58,-26).setType(Material.WHITE_CONCRETE);
+            world.getBlockAt(70,-58,-27).setType(Material.WHITE_CONCRETE);
+
+            world.getBlockAt(69,-62,-16).setType(Material.TARGET);
+            world.getBlockAt(65,-60,-13).setType(Material.TARGET);
+            world.getBlockAt(68,-57,-13).setType(Material.TARGET);
+            world.getBlockAt(68, -62, -11).setType(Material.TARGET);
+            world.getBlockAt(65,-58,-11).setType(Material.TARGET);
+            world.getBlockAt(66, -63, -8).setType(Material.TARGET);
+            world.getBlockAt(67, -56, -8).setType(Material.TARGET);
+        }
+
+        if(currentStage.getID() == 5) {
+            Dreamvator.getPlayers().forEach(player -> {
+                player.getInventory().clear(1);
+            });
+        }
 
         if(currentStage.getID() == 6) {
             Bukkit.broadcastMessage(Dreamvator.PREFIX + "§7Danke für's spielen unserer Map! Das Team §5NiX §7und §5Mistics §7danken für diesen schönen Contest, auch wenn wir in der letzten Minuten noch Panik hatten!");

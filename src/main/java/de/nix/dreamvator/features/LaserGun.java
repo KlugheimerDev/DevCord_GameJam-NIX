@@ -41,7 +41,7 @@ public class LaserGun implements Listener {
 
     @EventHandler
     public void onLeftClick(PlayerInteractEvent event) {
-        if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+        if(event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
             if(event.getItem() == null) return;
             if(!event.getItem().getType().toString().contains("AXE")) return;
             if(event.getItem().getType() == Material.DIAMOND_AXE) {
