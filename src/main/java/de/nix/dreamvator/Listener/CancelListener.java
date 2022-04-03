@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
@@ -30,6 +31,11 @@ public class CancelListener implements Listener {
         if(event.getClickedBlock() == null) return;
         if(disabledBlocks.contains(event.getClickedBlock().getType()))
             event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onFood(FoodLevelChangeEvent e) {
+        e.setCancelled(true);
     }
 
     @EventHandler

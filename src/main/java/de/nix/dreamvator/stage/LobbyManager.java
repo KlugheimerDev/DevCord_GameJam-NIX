@@ -31,6 +31,10 @@ public class LobbyManager implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         event.setJoinMessage("");
         Player player = event.getPlayer();
+
+        player.setHealth(20);
+        player.setFoodLevel(20);
+
         if(lobbyStage) {
             event.getPlayer().teleport(new Location(player.getWorld(), -12.5, -59, -37.5, -90, 0));
             event.setJoinMessage(Dreamvator.PREFIX + "§2" + player.getDisplayName() + " §r§7hat das Spiel betreten!");
