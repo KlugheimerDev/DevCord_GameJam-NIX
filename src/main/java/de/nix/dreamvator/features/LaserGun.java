@@ -43,18 +43,9 @@ public class LaserGun implements Listener {
 
     @EventHandler
     public void onLeftClick(PlayerInteractEvent event) {
-        Bukkit.broadcastMessage("lol1");
-
         if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
-            Bukkit.broadcastMessage("lol2");
-
             if(event.getItem() == null) return;
-            Bukkit.broadcastMessage("lol3");
-
             if(!event.getItem().getType().toString().contains("AXE")) return;
-
-            Bukkit.broadcastMessage("lol4");
-
             if(event.getItem().getType() == Material.DIAMOND_AXE) {
                 shoot(Dreamvator.getPlayers().get(1));
             } else if(event.getItem().getType() == Material.GOLDEN_AXE) {
@@ -70,6 +61,8 @@ public class LaserGun implements Listener {
         if(event.getHitBlock() != null && blockList.contains(event.getHitBlock())) {
             blockList.remove(event.getHitBlock());
             event.getHitBlock().setType(Material.DIAMOND_BLOCK);
+
+            event.getEntity().remove();
 
             if(blockList.size() == 0) {
                 world.getBlockAt(70,-59,-26).setType(Material.AIR);
