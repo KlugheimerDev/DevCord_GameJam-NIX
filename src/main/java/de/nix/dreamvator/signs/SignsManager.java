@@ -14,6 +14,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.Plugin;
 
 public class SignsManager implements Listener {
@@ -89,6 +90,11 @@ public class SignsManager implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
         event.getEntity().teleport(Dreamvator.checkpointManager.getCheckPoint(event.getEntity()));
+    }
+
+    @EventHandler
+    public void onRespawn(PlayerRespawnEvent e) {
+        e.setRespawnLocation(Dreamvator.checkpointManager.getCheckPoint(e.getPlayer()));
     }
 
     //Checkt ob ein Schild (an der location) in der ersten Zeile den String "str" besitzt
