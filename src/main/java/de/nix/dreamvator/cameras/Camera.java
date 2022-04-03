@@ -58,11 +58,13 @@ public class Camera {
     public Player getNearestPlayer() {
         Player nearestPlayer = null;
 
-        for(Player all : Bukkit.getOnlinePlayers()) {
-            if(nearestPlayer == null) {
-                nearestPlayer = all;
-            }else if(all.getLocation().distance(location) < nearestPlayer.getLocation().distance(location)) {
-                nearestPlayer = all;
+        if(Dreamvator.getPlayers() != null && !Dreamvator.getPlayers().isEmpty()) {
+            for(Player all : Dreamvator.getPlayers()) {
+                if(nearestPlayer == null) {
+                    nearestPlayer = all;
+                }else if(all.getLocation().distance(location) < nearestPlayer.getLocation().distance(location)) {
+                    nearestPlayer = all;
+                }
             }
         }
 
