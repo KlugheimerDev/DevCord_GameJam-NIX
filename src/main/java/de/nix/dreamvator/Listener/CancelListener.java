@@ -8,6 +8,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
 
@@ -41,6 +42,10 @@ public class CancelListener implements Listener {
 
     public void onDamage3(EntityDamageByBlockEvent e) {
         e.setCancelled(true);
+    }
+
+    public void onChat(AsyncPlayerChatEvent e) {
+        e.setFormat("§7" + e.getPlayer() + "8: §f" + e.getMessage());
     }
 
 }
