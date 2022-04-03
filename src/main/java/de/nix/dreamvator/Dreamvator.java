@@ -1,5 +1,6 @@
 package de.nix.dreamvator;
 
+import de.nix.dreamvator.Listener.CancelListener;
 import de.nix.dreamvator.cameras.CameraManager;
 import de.nix.dreamvator.checkpoint.CheckpointManager;
 import de.nix.dreamvator.elevator.ElevatorManager;
@@ -40,6 +41,8 @@ public final class Dreamvator extends JavaPlugin {
         LobbyManager lobbyManager = new LobbyManager(this);
         cameraManager = new CameraManager(this);
         WallClimb wallClimb = new WallClimb(this);
+
+        CancelListener cancelListener = new CancelListener(this);
 
         stageManager = new StageManager(this);
         metadataManager = new MetadataManager(this);
