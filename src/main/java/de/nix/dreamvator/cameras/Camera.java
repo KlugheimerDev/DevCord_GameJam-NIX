@@ -2,7 +2,6 @@ package de.nix.dreamvator.cameras;
 
 import de.nix.dreamvator.Dreamvator;
 import de.nix.dreamvator.misc.Skull;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,8 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.plugin.Plugin;
-
-import java.util.stream.Collectors;
 
 public class Camera {
 
