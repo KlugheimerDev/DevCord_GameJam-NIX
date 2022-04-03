@@ -37,6 +37,8 @@ public class LaserGun implements Listener {
         blockList.add(world.getBlockAt(67, -56, -8));
     }
 
+    boolean firstShot = false;
+
     @EventHandler
     public void onLeftClick(PlayerInteractEvent event) {
         if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
@@ -47,6 +49,8 @@ public class LaserGun implements Listener {
             } else if(event.getItem().getType() == Material.GOLDEN_AXE) {
                 shoot(Dreamvator.getPlayers().get(0));
             }
+
+            firstShot = true;
         }
     }
 
@@ -78,5 +82,8 @@ public class LaserGun implements Listener {
         arrow.setVelocity(arrow.getVelocity().multiply(1));
         arrow.setGravity(false);
         arrow.setSilent(true);
+
+        if(!firstShot)
+            Bukkit.broadcastMessage("§7" + player.getName() + "§8: §fWoher kam der Schuss ?");
     }
 }

@@ -32,6 +32,7 @@ public class LobbyManager implements Listener {
         event.setJoinMessage("");
         Player player = event.getPlayer();
         if(lobbyStage) {
+            event.getPlayer().teleport(new Location(player.getWorld(), -12.5, -59, -37.5, -90, 0));
             event.setJoinMessage(Dreamvator.PREFIX + "§2" + player.getDisplayName() + " §r§7hat das Spiel betreten!");
             player.setGameMode(GameMode.ADVENTURE);
             if (Dreamvator.getPlayers().size() < 2) {
@@ -81,8 +82,10 @@ public class LobbyManager implements Listener {
                 Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                     @Override
                     public void run() {
-                        Bukkit.broadcastMessage("§9" + ChatColor.of("#3972CB") + Dreamvator.getPlayers().get(0).getDisplayName() + "§7 » §r§fWir haben verschlafen! Wir müssen zur Arbeit!");
-                        Bukkit.broadcastMessage("§9" + ChatColor.of("#3972CB") + Dreamvator.getPlayers().get(1).getDisplayName() + "§7 » §r§fLos zum Lift!");
+
+                        Bukkit.broadcastMessage("§7" + Dreamvator.getPlayers().get(0).getDisplayName() + "§7 » §r§fWir haben verschlafen! Wir müssen zur Arbeit!");
+                        Bukkit.broadcastMessage("§7" + Dreamvator.getPlayers().get(1).getDisplayName() + "§7 » §r§fLos zum Lift!");
+
                         Dreamvator.stageManager.setCurrentStage(1);
                     }
                 }, 5*20);
@@ -95,7 +98,7 @@ public class LobbyManager implements Listener {
 
     private void hidePlayer(Player player) {
         Bukkit.getOnlinePlayers().forEach(current -> {
-            //current.hidePlayer(plugin, player);
+            current.hidePlayer(plugin, player);
         });
     }
 
