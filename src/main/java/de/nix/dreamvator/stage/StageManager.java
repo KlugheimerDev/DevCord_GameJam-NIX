@@ -106,7 +106,7 @@ public class StageManager {
                 Bukkit.getOnlinePlayers().forEach(player -> {
                     player.kickPlayer(Dreamvator.PREFIX + "§7Traum wird neu geladen..");
                 });
-                Bukkit.getServer().reload();
+                Bukkit.shutdown();
             }
         }, 20*time);
     }
